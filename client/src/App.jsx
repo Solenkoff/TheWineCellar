@@ -4,11 +4,12 @@ function App() {
 
     return (
         <>
-            <div>
-                <h2>New Title</h2>
-            </div>
+
+            <Home />
+
         </>
     )
+    
 }
 
 export default App
