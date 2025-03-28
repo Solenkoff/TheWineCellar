@@ -1,4 +1,5 @@
 
+import './About.css'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUser } from '@fortawesome/free-solid-svg-icons'
@@ -37,6 +38,14 @@ export default function About() {
                                         </span>
                                         <span className='nav-link'>Wines</span>
                                     </a>
+                                    <ul tabIndex={0} className="dropdown-content menu bg-base-100 z-1 ">
+                                        <li><a>All</a></li>
+                                        <li><a>White</a></li>
+                                        <li><a>Red</a></li>
+                                        <li><a>Sparkling</a></li>
+                                        <li><a>Rosé</a></li>
+                                        <li><a>Desert</a></li>
+                                    </ul>
                                 </div>
                                 <div className="dropdown dropdown-hover">
                                     <a tabIndex={0} role="button" className="btn m-1">
@@ -45,6 +54,12 @@ export default function About() {
                                         </span>
                                         <span className='nav-link'>Offers</span>
                                     </a>
+                                    <ul tabIndex={0} className="dropdown-content menu bg-base-100 z-1 ">
+                                        <li><a>All</a></li>
+                                        <li><a>&gt; 20%</a></li>
+                                        <li><a>&gt; 30%</a></li>
+                                        <li><a>&gt; 50%</a></li>
+                                    </ul>
                                 </div>
                                 <div className="dropdown dropdown-hover">
                                     <a tabIndex={0} role="button" className="btn m-1">
@@ -53,6 +68,16 @@ export default function About() {
                                         </span>
                                         <span className='nav-link'>Grapes</span>
                                     </a>
+                                    <ul tabIndex={0} className="dropdown-content menu bg-base-100 z-1 ">
+                                        <li><a>Cabernet Franc</a></li>
+                                        <li><a>Cabernet Sauvignon</a></li>
+                                        <li><a>Chardonnay</a></li>
+                                        <li><a>Malbec</a></li>
+                                        <li><a>Merlot</a></li>
+                                        <li><a>Riesling</a></li>
+                                        <li><a>Sauvignon Blanc</a></li>
+                                        <li><a>Shiraz/Syrah</a></li>
+                                    </ul>
                                 </div>
                                 <div className="dropdown dropdown-hover">
                                     <a tabIndex={0} role="button" className="btn m-1">
@@ -61,6 +86,16 @@ export default function About() {
                                         </span>
                                         <span className='nav-link'>Regions</span>
                                     </a>
+                                    <ul tabIndex={0} className="dropdown-content menu bg-base-100 z-1 ">
+                                        <li><a>Bordeaux</a></li>
+                                        <li><a>Bourgogne</a></li>
+                                        <li><a>Napa Valley</a></li>
+                                        <li><a>Toscana</a></li>
+                                        <li><a>Rioja</a></li>
+                                        <li><a>Barolo</a></li>
+                                        <li><a>Marlborough Sauvignon Blanc</a></li>
+                                        <li><a>California</a></li>
+                                    </ul>
                                 </div>
                             </div>
 
@@ -73,6 +108,12 @@ export default function About() {
                                     <a src="#" className='icon-container'>
                                         <FontAwesomeIcon icon={faUser} className='user-icon' />
                                     </a>
+                                    <ul tabIndex={0} className="dropdown-content menu bg-base-100 z-1 ">
+                                        <li><a>Profile</a></li>
+                                        <li><a>Orders</a></li>
+                                        <li><a>Wishlist</a></li>
+                                        <li className='devider'><a >Logout</a></li>
+                                    </ul>
                                 </div>
                             </div>
 
@@ -125,7 +166,7 @@ export default function About() {
 
                             <div className="devider"></div>
 
-                             <div className="team-container">
+                            <div className="team-container">
                                 <p className="the-team">THE</p>
                                 <h2 className="company">The Wine Cellar</h2>
                                 <p className="the-team">TEAM</p>
