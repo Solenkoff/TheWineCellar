@@ -1,3 +1,7 @@
+import Home from "./components/Home/Home"
+import About from "./components/about/About";
+
+
 import './App.css'
 
 function App() {
@@ -7,6 +11,8 @@ function App() {
 
             <Home />
             <About />
+            <Test />
+            
         </>
     )
 
