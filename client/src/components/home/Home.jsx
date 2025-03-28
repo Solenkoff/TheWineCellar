@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
+import './Home.css';
 
 export default function Home() {
-
-
+  
     // Mock data for wine cards
     const wineCards = Array(8).fill().map((_, i) => ({
       id: i + 1,
@@ -11,6 +11,7 @@ export default function Home() {
       price: `$${(20 + i * 5).toFixed(2)}`,
       rating: '★★★★☆'
     }));
+
 
     return (
         <div className="min-w-screen min-h-screen flex flex-col">
@@ -57,21 +58,22 @@ export default function Home() {
             <main className='main'>
                 <div>
 
-                    {wineCards.map((wine) => 
-                    <div key={wine.id} className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow">
-                      <div className="h-48 bg-gray-200 flex items-center justify-center">
-                        <span className="text-5xl">🍷</span>
-                      </div>
-                      <div className="p-4">
-                        <h3 className="font-bold text-lg mb-1">{wine.name}</h3>
-                        <p className="text-gray-600 text-sm mb-2">{wine.region}</p>
-                        <div className="flex justify-between items-center">
-                          <span className="font-bold">{wine.price}</span>
-                          <span className="text-yellow-500">{wine.rating}</span>
+                    {wineCards.map((wine) =>
+                        <div key={wine.id} className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow">
+                            <div className="h-48 bg-gray-200 flex items-center justify-center">
+                                <span className="text-5xl">🍷</span>
+                            </div>
+                            <div className="p-4">
+                                <h3 className="font-bold text-lg mb-1">{wine.name}</h3>
+                                <p className="text-gray-600 text-sm mb-2">{wine.region}</p>
+                                <div className="flex justify-between items-center">
+                                    <span className="font-bold">{wine.price}</span>
+                                    <span className="text-yellow-500">{wine.rating}</span>
+                                </div>
+                            </div>
                         </div>
-                      </div>
-                    </div>
-                   )}
+                    )}
+
 
                 </div>
             </main>

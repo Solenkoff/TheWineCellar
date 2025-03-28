@@ -6,10 +6,10 @@ function App() {
         <>
 
             <Home />
-
+            <About />
         </>
     )
-    
+
 }
 
 export default App
