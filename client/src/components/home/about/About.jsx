@@ -125,6 +125,17 @@ export default function About() {
 
                             <div className="devider"></div>
 
+                             <div className="team-container">
+                                <p className="the-team">THE</p>
+                                <h2 className="company">The Wine Cellar</h2>
+                                <p className="the-team">TEAM</p>
+                                <p className="team">Meet the brains behind the operation</p>
+                                <p className="team">Akosua Oben-Nyarko · Alaina Dudhia · Alexander Holm · Alasdair Hawkins · Alexander Jensen · Alexander Sheward · Alexis Kozak · Alice Powell · Alina Waag · Anders Klenke · Andreas Aagaard · Andreea Sandu · Anna Thompson · Astrid Gudmand · Boris Guillome · Carmen Enciso · Christelle Borel · Christian Orthmann · Christina Krogh Nielsen · Daniel Kouthoofd · Dani Lofiego-Verdugo · Dara Creavin · Dennis Otimong · Diane Dufour · Dominik Demcak · Drew Schimmel · Edoardo Domenico Primo · Eduardo Rodrigues · Eduardo Sorribas Canela · Emilie Voss · Emmet Farrell · Eri Watanabe · Eric Miller · Fede Strand · Florencia Torres · Francisco José García Montenegro · Genny Locaputo · Gonzalo de Leyva · Gregor Kirschbaum · Gwenyth Marie Siu · Heini Zachariassen · Helgi Finsson · Henning Kuberczyk · James Fildes · James Hurst ·Jarle List · Jef Schrijvers · Jens Oechsler · Jill Bartnick · Joachim Svensson · John Bevan · John Wooton · Jonas Hinge · Jonas Jakobsen · Jonathan Krog · Josh Malarkey · Julie Porst · Karthik Krosuri · Kasper Weibel Nielsen-Refs · Katy Petersen · Kellie Belcher · Kenneth Kirchhoff · Kir Doronin · Konrad Bajtyngier · Krishna Kurri · Kristi Marie Paris · Kristine Bergfelde · Kyle Tunis · Lachlan Denyer · Laure du Temple · Laurence Coombe · Liz Dyer · Lorena Cazan · Lucas Beck · Lucas Fulchiron · Lukas Kimmer · Lukas Rist · Mahendra Raj · Mao Morisawa · Mariana Lamesta · Mariia Dehtiarova · Matt Barham · Matthew Breedon · Melanie Miller · Michael Skuratovich · Miguel Zurbano Sanchez · Mimi Holmes · Mina Miyazaki · Monika Mateska · Morten Fillipsen · Morten Slott Hansen · Morten Heuing · Mubarak Hussain · Nathalie Croquelois · Nik Suprunov · Nikolaj Jønsson · Nikolai Ianchuk · Nitheesh Krishnanandan · Oleg Parinov · Oleksandr Vilchynskyy · Oliver Hye-Knudsen · Omer Tanveer · Patrick Petersen · Paul Gerken · Paul Jones · Paula Cons · Pauline Boering · Petra Gent · Praveen Rai · Raul-Mircea Crivineanu · Rebecca Friis · Rebecca Picard · Rasmus Hilleke · Rebecca Simmons · Rosalie ter Braak · Samuel Serra · Sarah Korn · Shelby De Mello · Silje Stougaard · Silvia Pedrazzi · Simon Benfeldt Jørgensen · Soo Hong · Stefan Penk · Stefan Petersen · Stefanos Kyriakou · Talita Andrzejewska · Tanja Olsen · Thomas Pilgaard Carlsen · Tue Sø · Verena Hinrichs · Vlad Dzeikun · Uljana Dufour · Vinicius Ribeiro · Wesley Cheng · William Parsons · Yaryna Lebedovych · Yauheni Baradaukin · Zainab Diab · Zbyněk Vymazal · Zuzanna Gesla</p>
+                            </div>
+
+
+                            <div className="devider"></div>
+
                         </div>
                     </div>
                 </main>
