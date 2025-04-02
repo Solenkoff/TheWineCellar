@@ -287,3 +287,33 @@ body::-webkit-scrollbar {
     line-height: 2.8rem;
     font-weight: 600;
 }
+
+
+/*  ------   Wine List  ======  */
+
+.wine-list {
+    width: 78%;
+    height: 48rem;
+    border-radius: 2em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5em 1em;
+    flex-wrap: wrap;
+    overflow: scroll;
+    padding: 6.4em 1em;
+    box-shadow: inset 0px 0px 12px 0px rgba(110, 25, 110, 0.34);
+    box-shadow: inset 0px 0px 24px 1px rgba(230, 218, 230, 0.8);
+    box-shadow: inset 0px 0px 10px 0px rgba(115, 31, 115, 0.24);
+    box-shadow: inset 0px 0px 8px 0px rgba(115, 31, 115, 0.16);
+}
+
+.wine-list::-webkit-scrollbar {
+    display: none;
+}
+
+.wine-list {
+    overflow: -moz-scrollbars-none;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
