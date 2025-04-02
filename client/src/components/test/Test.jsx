@@ -1,3 +1,9 @@
+import './Test.css'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faUser } from '@fortawesome/free-solid-svg-icons'
+import { faInstagram, faSquareFacebook, faXTwitter, faYoutube, faTiktok } from '@fortawesome/free-brands-svg-icons';
+
+const wines = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
 
 
 export default function Test() {
@@ -110,7 +116,7 @@ export default function Test() {
                                 </div>
                             </div>
 
-                           
+
                         </div>
                     </div>
                 </header>
@@ -129,8 +135,22 @@ export default function Test() {
                         </div>
 
                         <div className='wine-list'>
-                           
 
+                            {wines.map((wine) =>
+                                <div key={wine.id} className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow">
+                                    <div className="h-48 bg-gray-200 flex items-center justify-center">
+                                        <span className="text-5xl">🍷</span>
+                                    </div>
+                                    <div className="p-4">
+                                        <h3 className="font-bold text-lg mb-1">{wine.name}</h3>
+                                        <p className="text-gray-600 text-sm mb-2">{wine.region}</p>
+                                        <div className="flex justify-between items-center">
+                                            <span className="font-bold">{wine.price}</span>
+                                            <span className="text-yellow-500">{wine.rating}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
                         </div>
                     </div>
 
