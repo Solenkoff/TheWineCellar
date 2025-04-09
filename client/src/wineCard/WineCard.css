@@ -128,3 +128,32 @@ img {
   text-decoration: line-through;
 }
 
+
+/*  -----  Bottom  ----- */
+
+.card-bottom {
+  padding: 0 1em;
+}
+.grapes-year {
+  font-weight: 500;
+}
+
+.country-contaier {
+  display: flex;
+  justify-content: flex-start;
+  align-items: baseline;
+}
+
+.flag-container {
+  display: inline-block;
+  width: 1.4em;
+  aspect-ratio: 1/1; 
+  position: relative;
+  margin-right: 8px;
+
+}
+.flag-image {
+  width: 100%;
+  position: absolute;
+  top: 4px;
+}
