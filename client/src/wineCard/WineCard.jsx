@@ -1,3 +1,5 @@
+import './WineCard.css';
+
 
 export default function WineCard({
     w,
