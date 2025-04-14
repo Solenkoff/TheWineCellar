@@ -3,6 +3,7 @@ import './Home.css';
 import WineCard from '../wineCard/WineCard';
 
 export default function Home() {
+ 
 
     // Mock data for wine cards
     // const wineCards = Array(8).fill().map((_, i) => ({
@@ -12,6 +13,14 @@ export default function Home() {
     //   price: `$${(20 + i * 5).toFixed(2)}`,
     //   rating: '★★★★☆'
     // }));
+
+     // Navigation data
+    const navItems = [
+        { name: 'Wines', icon: '🍷', links: ['Red Wines', 'White Wines', 'Sparkling'] },
+        { name: 'Offers', icon: '💰', links: ['Special Deals', 'Bundles', 'Clearance'] },
+        { name: 'Grapes', icon: '🍇', links: ['Cabernet', 'Merlot', 'Chardonnay'] },
+        { name: 'Regions', icon: '🗺️', links: ['France', 'Italy', 'Spain'] }
+    ];
 
    
     const wines = [1, 2, 3, 4]
