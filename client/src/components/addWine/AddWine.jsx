@@ -1,11 +1,48 @@
+import { useState } from 'react';
+import Select from 'react-select'; 
 
+import './AddWine.css'
+import '../test/Test.css'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUser } from '@fortawesome/free-solid-svg-icons'
 import { faInstagram, faSquareFacebook, faXTwitter, faYoutube } from '@fortawesome/free-brands-svg-icons';
 
 
+const categoryOptions = [
+    { value: "all" , label: "All" },
+    { value: "white" , label: "White" },
+    { value: "red" , label: "Red" },
+    { value: "sparkling" , label: "Sparkling" },
+    { value: "rose" , label: "Rosé" },
+    { value: "desert" , label: "Desert" },
+];
+
+const customStyles = {
+    control: (provided) => ({
+        ...provided,
+        width: "400px",
+        borderRadius: "6px", 
+        boxShadow: "none",
+        textAlign: "left",
+    }),
+    option: (provided, state) => ({
+        ...provided,
+        width: "400px",
+        color: state.isSelected ? "var(--clr-font-purple)" : "var(--clr-purple-mid)",
+        backgroundColor: state.isSelected ? "var(--clr-bg-purple-very-light)" : "transparent",
+        // backgroundColor: state.isHover ? "var(--clr-bg-purple-very-light)" : "lightgray"
+    }),
+};
+
+
 export default function AddWine() {
+    const [category, setCategory] = useState('All');
+
+
+    const changeCategory = (e) => {
+        setCategory(e.target.value);
+    }
 
 
     return (
@@ -169,6 +206,7 @@ export default function AddWine() {
                                             <label htmlFor="headline" className="fieldset-legend">Headline</label>
                                             <input type="text" id="headline" name="headline" className="input" placeholder="Viña Alberdi Reserva 2019" />
                                         </fieldset>
+
                                     </div>
                                 </form>
                             </section>
@@ -176,6 +214,8 @@ export default function AddWine() {
                             <section className='btn-section'>
                                 <input className="btn submit" type="submit" value="Add Wine" />
                             </section>
+
+
 
                         </div>
 
