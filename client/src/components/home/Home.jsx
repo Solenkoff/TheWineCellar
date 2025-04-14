@@ -3,7 +3,9 @@ import './Home.css';
 import WineCard from '../wineCard/WineCard';
 
 export default function Home() {
- 
+    const [activeTab, setActiveTab] = useState(null);
+    const [currentPage, setCurrentPage] = useState(1);
+    const totalPages = 5;
 
     // Mock data for wine cards
     // const wineCards = Array(8).fill().map((_, i) => ({
@@ -14,7 +16,7 @@ export default function Home() {
     //   rating: '★★★★☆'
     // }));
 
-     // Navigation data
+    // Navigation data
     const navItems = [
         { name: 'Wines', icon: '🍷', links: ['Red Wines', 'White Wines', 'Sparkling'] },
         { name: 'Offers', icon: '💰', links: ['Special Deals', 'Bundles', 'Clearance'] },
@@ -22,7 +24,7 @@ export default function Home() {
         { name: 'Regions', icon: '🗺️', links: ['France', 'Italy', 'Spain'] }
     ];
 
-   
+
     const wines = [1, 2, 3, 4]
 
     return (
@@ -65,11 +67,11 @@ export default function Home() {
                     </div>
                 </div>
             </footer>
-            
+
 
             <main className='main'>
                 <div>
-                          {/* {wineCards.map((wine) => (
+                    {/* {wineCards.map((wine) => (
                     <div key={wine.id} className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow">
                       <div className="h-48 bg-gray-200 flex items-center justify-center">
                         <span className="text-5xl">🍷</span>
