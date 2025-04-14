@@ -145,9 +145,30 @@ export default function AddWine() {
                                         </fieldset>
                                         <fieldset className="fieldset">
                                             <label htmlFor="category" className="fieldset-legend">Category</label>
-                                            <input type="text" id="category" name="category" className="input" placeholder="Sparkling" />
+                                            <select id="category" value={category} onChange={changeCategory} className="select">
+                                                <option className="option">All</option>
+                                                <option className="option">White</option>
+                                                <option>Red</option>
+                                                <option>Sparkling</option>
+                                                <option>Rosé</option>
+                                                <option>Desert</option>
+                                            </select>
                                         </fieldset>
-                                       
+                                        <fieldset className="fieldset">
+                                            <Select options={categoryOptions} styles={customStyles}/>
+                                            <label htmlFor="headline" className="fieldset-legend">Headline</label>
+                                            <input type="text" id="headline" name="headline" className="input" placeholder="Viña Alberdi Reserva 2019" />
+                                        </fieldset>
+
+
+                                        <fieldset className="fieldset">
+                                            <label htmlFor="headline" className="fieldset-legend">Headline</label>
+                                            <input type="text" id="headline" name="headline" className="input" placeholder="Viña Alberdi Reserva 2019" />
+                                        </fieldset>
+                                        <fieldset className="fieldset">
+                                            <label htmlFor="headline" className="fieldset-legend">Headline</label>
+                                            <input type="text" id="headline" name="headline" className="input" placeholder="Viña Alberdi Reserva 2019" />
+                                        </fieldset>
                                     </div>
                                 </form>
                             </section>
