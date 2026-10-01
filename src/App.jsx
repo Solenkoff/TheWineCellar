@@ -1,3 +1,4 @@
+import { Route, Routes } from "react-router"
 import Catalog from "./components/catalog/Catalog"
 import Footer from "./components/footer/Footer"
 import Header from "./components/header/Header"
@@ -10,10 +11,11 @@ function App() {
 
             <Header />
 
-            <Home />
+            <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/catalog" element={<Catalog />} />
+            </Routes>
 
-            <Catalog />
-           
             <Footer />
 
         </>
