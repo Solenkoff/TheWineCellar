@@ -6,7 +6,7 @@ export default function Catalog() {
     const [items, setItems] = useState([]);
 
     useEffect(() => {
-        request('/items')
+        request('/items?order=added_on.desc')
         .then(setItems)
         .catch(err => alert(err));
     }, []);
@@ -28,6 +28,7 @@ export default function Catalog() {
                 </div>
             </div>
             {/* End Hero Section */}
+
             <div className="untree_co-section product-section before-footer-section">
                 <div className="container">
                     <div className="row">
@@ -38,6 +39,7 @@ export default function Catalog() {
                     </div>
                 </div>
             </div>
+            
         </>
 
     );

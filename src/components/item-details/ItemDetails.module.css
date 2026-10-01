@@ -1,0 +1,135 @@
+
+.item-details-section {
+    padding: 60px 0 80px;
+}
+
+.item-details-layout {
+    display: grid;
+    grid-template-columns: 2fr 3fr;
+    gap: 100px;
+    align-items: start;
+}
+
+/* Image section */
+
+.item-details-gallery {
+    text-align: center;
+}
+
+.item-details-image {
+    display: block;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.image-dots {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.image-dots span {
+    width: 11px;
+    height: 11px;
+    background-color: #ccc;
+    border-radius: 50%;
+}
+
+.image-dots span.active {
+    background-color: #3b5d50;
+}
+
+.item-details-price {
+    margin-top: 30px;
+    font-size: 32px;
+    font-weight: 700;
+    color: #000;
+}
+
+/* Content section */
+
+.item-details-content {
+    padding-top: 10px;
+}
+
+.item-details-title{
+    margin: 12px 20px 40px;
+}
+
+.item-info-row {
+    display: grid;
+    grid-template-columns: 150px minmax(0, 1fr);
+    gap: 20px;
+    margin-bottom: 22px;
+    align-items: start;
+}
+
+.item-info-row strong {
+    color: #000;
+    font-weight: 600;
+}
+
+.item-info-row span,
+.item-info-row p {
+    color: #000;
+    margin: 0;
+    overflow-wrap: anywhere;
+    line-height: 1.7;
+}
+
+/* Action buttons */
+
+.item-details-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    margin-top: 52px;
+}
+
+.details-btn {
+    padding: 12px 35px;
+    border-radius: 8px;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.edit-btn {
+    background-color: #f9bf29;
+    color: #000;
+}
+
+.delete-btn {
+    background-color: #dc3545;
+    color: #fff;
+}
+
+.like-btn {
+    background-color: transparent;
+    border: 1px solid #333;
+    color: #000;
+}
+
+/* Responsive layout */
+
+@media (max-width: 768px) {
+    .item-details-layout {
+        grid-template-columns: 1fr;
+        gap: 35px;
+    }
+
+    .item-info-row {
+        grid-template-columns: 120px minmax(0, 1fr);
+        gap: 12px;
+    }
+}
+
+@media (max-width: 400px) {
+    .item-info-row {
+        grid-template-columns: 1fr;
+        gap: 4px;
+    }
+}
