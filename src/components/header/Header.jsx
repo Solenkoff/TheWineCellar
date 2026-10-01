@@ -29,19 +29,19 @@ export default function Header() {
                                 <Link className="nav-link" to="/">Home</Link>
                             </li>
                             <li>
-                                <Link className="nav-link" to="/catalog">Shop</Link>
+                                <Link className="nav-link" to="/catalog">Catalog</Link>
                             </li>
                             <li>
-                                <Link className="nav-link" to="about.html">About us</Link>
+                                <Link className="nav-link" to="#">About us</Link>
                             </li>
                             <li>
-                                <Link className="nav-link" to="services.html">Services</Link>
+                                <Link className="nav-link" to="#">Services</Link>
                             </li>
                             <li>
-                                <Link className="nav-link" to="blog.html">Blog</Link>
+                                <Link className="nav-link" to="#">Blog</Link>
                             </li>
                             <li>
-                                <Link className="nav-link" to="contact.html">Contact us</Link>
+                                <Link className="nav-link" to="#">Contact us</Link>
                             </li>
                         </ul>
                         <ul className="custom-navbar-cta navbar-nav mb-2 mb-md-0 ms-5">
