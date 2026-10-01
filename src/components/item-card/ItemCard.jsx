@@ -1,4 +1,7 @@
+import { Link } from "react-router";
+
 export default function ItemCard({
+    id,
     images,
     title,
     price
@@ -6,7 +9,7 @@ export default function ItemCard({
     return (
 
         <div className="col-12 col-md-4 col-lg-3 mb-5">
-            <a className="product-item" href="#">
+            <Link to={`/items/${id}`} className="product-item" >
                 <img
                     src={images[0]}
                     className="img-fluid product-thumbnail"
@@ -16,10 +19,10 @@ export default function ItemCard({
                 <span className="icon-cross">
                     <img src="images/cross.svg" className="img-fluid" />
                 </span>
-            </a>
+            </Link>
         </div>
 
     );
 }
 
-
+  

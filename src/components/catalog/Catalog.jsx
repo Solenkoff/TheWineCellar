@@ -7,11 +7,11 @@ export default function Catalog() {
 
     useEffect(() => {
         request('/items?order=added_on.desc')
-        .then(setItems)
-        .catch(err => alert(err));
+            .then(setItems)
+            .catch(err => alert(err));
     }, []);
 
-    return ( 
+    return (
 
         <>
             {/* Start Hero Section */}
@@ -32,14 +32,14 @@ export default function Catalog() {
             <div className="untree_co-section product-section before-footer-section">
                 <div className="container">
                     <div className="row">
-                        {items.length > 0 
+                        {items.length > 0
                             ? items.map(item => <ItemCard key={item.id} {...item} />)
                             : <h1>No Added Items Yet</h1>
-}
+                        }
                     </div>
                 </div>
             </div>
-            
+
         </>
 
     );

@@ -1,18 +1,41 @@
+import { useEffect, useState } from "react";
+import { useParams } from "react-router";
+import request from "../../utils/request";
+
 import styles from "./ItemDetails.module.css";
 
 export default function ItemDetails() {
+    const { itemId } = useParams();
+    const [item, setItem] = useState({});
+
+    useEffect(() => {
+        request(`/items?id=eq.${itemId}`)
+            .then(result => {
+                console.log(result[0]);
+                setItem(result[0]);
+            })
+            .catch(err => alert(err));
+    }, [itemId]);
+
+    // if (!item) {
+    //     return <p>Loading item details...</p>;
+    // }
+
+
+    // console.log(item.images[0]);
+    // Log the itemId to the console for debugging
     // Temporary data until we connect the Details API
-    const item = {
-        title: "Modern Grey Armchair",
-        category: "Sofas",
-        description: "A comfortable and stylish armchair in great condition. Perfect for a living room, bedroom or reading corner.",
-        images: ["/images/sofa-01.jpg"],
-        price: 135,
-        created_at: "2025-10-27",
-        owner_name: "JohnDoe",
-        status: "available",
-        likes_count: 12,
-    };
+    // const item = {
+    //     title: "Modern Grey Armchair",
+    //     category: "Sofas",
+    //     description: "A comfortable and stylish armchair in great condition. Perfect for a living room, bedroom or reading corner.",
+    //     images: ["/images/sofa-01.jpg"],
+    //     price: 135,
+    //     created_at: "2025-10-27",
+    //     owner_name: "JohnDoe",
+    //     status: "available",   
+    //     likes_count: 12,
+    // };
 
     // Temporary values for testing the layout
     const isOwner = false;
@@ -22,6 +45,10 @@ export default function ItemDetails() {
     // const canManage = isOwner || isAdmin;
     const canManage = true; // Temporary value for testing the layout
     const canLike = isLoggedIn && !canManage;
+
+    console.log("Item:", item);
+    console.log("Images:", item.images);
+    console.log("First image:", item.images?.[0]);
 
     return (
 
@@ -33,7 +60,7 @@ export default function ItemDetails() {
 
                         <div className={styles["item-details-gallery"]}>
                             <img
-                                src={item.images[0]}
+                                src={item.images?.[0]}
                                 alt={item.title}
                                 className={styles["item-details-image"]}
                             />
@@ -66,13 +93,13 @@ export default function ItemDetails() {
                             <div className={styles["item-info-row"]}>
                                 <strong>Listing Date:</strong>
                                 <span>
-                                    {new Date(item.created_at).toLocaleDateString("en-GB")}
+                                    {new Date(item.added_on).toLocaleDateString("en-GB")}
                                 </span>
                             </div>
 
                             <div className={styles["item-info-row"]}>
                                 <strong>Listed by:</strong>
-                                <span>{item.owner_name}</span>
+                                <span>Pesho</span>
                             </div>
 
                             <div className={styles["item-info-row"]}>
@@ -96,14 +123,14 @@ export default function ItemDetails() {
 
                                 {canLike && (
                                     <button className={styles["details-btn"] + " " + styles["like-btn"]}>
-                                        ♡ &nbsp; {item.likes_count} Likes
+                                        ♡ &nbsp; 14 Likes
                                     </button>
                                 )}
                             </div>
                         </div>
 
                     </div>
-                    
+
                 </div>
             </div>
 
