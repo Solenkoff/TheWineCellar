@@ -16,8 +16,8 @@ export default function Home() {
                                     Beautiful pre-loved pieces looking for a home, not a dumpster. Every single item in our catalog is waiting for someone like you to step in, rescue it from the landfill, and bring it home without spending a fortune. 
                                 </p>
                                 <p>
-                                    <a href="" className="btn btn-secondary me-2">
-                                        Rescue 
+                                    <a href="#" className="btn btn-secondary me-2">
+                                        Rescue Now
                                     </a> 
                                     {/* <a href="#" className="btn btn-white-outline">
                                         Explore
@@ -413,7 +413,7 @@ export default function Home() {
                 </div>
             </div>
             {/* End Blog Section */}
-            
+
         </>
     );
 }
