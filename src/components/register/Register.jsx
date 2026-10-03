@@ -1,8 +1,32 @@
+import { useState } from "react";
+import { useNavigate } from "react-router";
+
 import styles from "./Register.module.css";
 
 export default function Register() {
-    function handleSubmit(event) {
-        event.preventDefault();
+    const [user, setUser] = useState(null);
+    const navigate = useNavigate();
+
+    const registerAction = (formData) => {
+
+        const username = formData.get("username");
+        const email = formData.get("email");
+        const password = formData.get("password");
+        const confirmPassword = formData.get("confirm-password")
+
+        if (!username || !email || !password || !confirmPassword) {
+            alert('All fields are required!');
+            return;
+        } 
+
+        if (password !== confirmPassword) {
+            alert('Passwords do not match!');
+            return;
+        }
+
+        setUser({ email }); 
+
+         
     }
 
     return (
@@ -13,13 +37,14 @@ export default function Register() {
                 <div className={styles["register-modal"]} role="dialog" aria-modal="true" aria-labelledby="register-title">
                     <div className={styles["register-header"]}>
                         <div>
+                            {user && <p>Welcome, {user.email}!</p>}
                             <h2 id="register-title">Join the Rescue</h2>
                             <p>Create an account and help furniture find a new home.</p>
                         </div>
                         <button type="button" className={styles["register-close"]} aria-label="Close">×</button>
                     </div>
 
-                    <form onSubmit={handleSubmit}>
+                    <form action={registerAction}>
                         <div className={styles["register-form-group"]}>
                             <label htmlFor="register-username">Username *</label>
                             <input type="text" id="register-username" name="username" placeholder="Choose a username" required />
@@ -34,7 +59,7 @@ export default function Register() {
                         </div>
                         <div className={styles["register-form-group"]}>
                             <label htmlFor="register-confirm">Confirm Password *</label>
-                            <input type="password" id="register-confirm" name="confirmPassword" placeholder="Repeat your password" required />
+                            <input type="password" id="register-confirm" name="confirm-password" placeholder="Repeat your password" required />
                         </div>
                         <div className={styles["register-buttons"]}>
                             <button type="button" className={styles["register-cancel"]} >Cancel</button>
@@ -44,7 +69,7 @@ export default function Register() {
                     <p className={styles["register-switch"]}>Already registered? <a href="/login">Log in</a></p>
                 </div>
             </div>
-            
+
         </div>
 
     );
