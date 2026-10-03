@@ -14,26 +14,24 @@ function App() {
     const [user, setUser] = useState(null);
 
     const userAuthHanler = (userData) => {
-        setUser(userData);
+        setUser(userData);    
     }
 
     return (
         <>
 
-            <Header />
-
-            {user && <p>Welcome, {user.email}!</p>}
+            <Header isAuthenticated={!!user} />
 
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/catalog" element={<Catalog />} />
                 <Route path="/items/:itemId" element={<ItemDetails />} />
                 <Route path="/items/add" element={<ItemAdd />} />
-                <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register onRegister={userAuthHanler} />} />
+                <Route path="/login" element={<Login onLogin={userAuthHanler} />} />
             </Routes>
 
-            <Footer />
+            <Footer /> 
 
         </>
 

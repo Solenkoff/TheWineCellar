@@ -1,6 +1,8 @@
 import { Link } from "react-router";
 
-export default function Header() {
+export default function Header({
+    isAuthenticated,
+}) {
     return (
 
         <header>
@@ -43,6 +45,11 @@ export default function Header() {
                             <li>
                                 <Link className="nav-link" to="#">Contact us</Link>
                             </li>
+                            {isAuthenticated &&
+                                <li>
+                                    <Link className="nav-link" to="/items/add">AddListing</Link>
+                                </li>
+                            }
                         </ul>
                         <ul className="custom-navbar-cta navbar-nav mb-2 mb-md-0 ms-5">
                             <li>
@@ -50,11 +57,21 @@ export default function Header() {
                                     <img src="/public/images/user.svg" />
                                 </a>
                             </li>
-                            <li>
-                                <Link className="nav-link" to="/login">
-                                    Login
-                                </Link>
-                            </li>
+                            {isAuthenticated
+                                ? (
+                                    <li>
+                                        <Link className="nav-link" to="/logout">
+                                            Logout
+                                        </Link>
+                                    </li>)
+                                : (
+                                    <li>
+                                        <Link className="nav-link" to="/login">
+                                            Login
+                                        </Link>
+                                    </li>
+                                )
+                            }
                         </ul>
                     </div>
                 </div>

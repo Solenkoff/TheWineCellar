@@ -1,9 +1,21 @@
+import { useNavigate } from 'react-router';
 import styles from './Login.module.css'
 
-export default function Login() {
+export default function Login({
+    onLogin,
+}) {
+    const navigate = useNavigate();
 
-    function handleSubmit(event) {
-        event.preventDefault();
+    const submitAction = (formData) => {
+        const {email, password} = Object.fromEntries(formData);
+
+        if(!email || !password){
+            alert('Email and password are required!');
+        }
+        
+        onLogin({email});
+
+        navigate('/');
     }
 
     return ( 
@@ -20,7 +32,7 @@ export default function Login() {
                         <button type="button" className={styles["login-close"]} aria-label="Close">×</button>
                     </div>
 
-                    <form onSubmit={handleSubmit}>
+                    <form action={submitAction}>
                         <div className={styles["login-form-group"]}>
                             <label htmlFor="login-email">Email *</label>
                             <input type="email" id="login-email" name="email" placeholder="you@example.com" required />
