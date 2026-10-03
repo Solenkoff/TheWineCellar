@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router"
+import { Route, Routes, useNavigate } from "react-router"
 import { useState } from "react"
 
 import Catalog from "./components/catalog/Catalog"
@@ -9,13 +9,19 @@ import ItemDetails from "./components/item-details/ItemDetails"
 import ItemAdd from "./components/item-add/ItemAdd"
 import Login from "./components/login/Login"
 import Register from "./components/register/Register"
+import Logout from "./components/logout/Logout"
 
 function App() {
+    const navigate = useNavigate();
     const [user, setUser] = useState(null);
 
     const userAuthHanler = (userData) => {
         setUser(userData);    
-    }
+    };
+
+    const logoutAction = () => {
+        setUser(null);
+    };
 
     return (
         <>
@@ -29,6 +35,7 @@ function App() {
                 <Route path="/items/add" element={<ItemAdd />} />
                 <Route path="/register" element={<Register onRegister={userAuthHanler} />} />
                 <Route path="/login" element={<Login onLogin={userAuthHanler} />} />
+                <Route path="/logout" element={<Logout onLogout={logoutAction} />} />
             </Routes>
 
             <Footer /> 
