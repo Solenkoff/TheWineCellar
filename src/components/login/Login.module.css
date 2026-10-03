@@ -1,0 +1,123 @@
+/* The modal covers the page behind it. */
+.login-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background-color: rgba(25, 35, 30, 0.65);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.login-modal {
+    width: 100%;
+    max-width: 460px;
+    max-height: 90vh;
+    overflow-y: auto;
+    background-color: #fdfdfb;
+    border-radius: 14px;
+    padding: 30px;
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.2);
+}
+
+.login-header {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    margin-bottom: 24px;
+}
+
+.login-header h2 {
+    margin: 0 0 8px;
+    color: #294c40;
+    font-size: 26px;
+}
+
+.login-header p {
+    margin: 0;
+    color: #666;
+    font-size: 14px;
+}
+
+.login-close {
+    border: none;
+    background: transparent;
+    color: #666;
+    font-size: 28px;
+    cursor: pointer;
+    align-self: flex-start;
+}
+
+.login-form-group {
+    margin-bottom: 18px;
+}
+
+.login-form-group label {
+    display: block;
+    margin-bottom: 7px;
+    font-weight: 600;
+    color: #333;
+}
+
+.login-form-group input {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #d2d8d4;
+    border-radius: 7px;
+    background-color: #fff;
+    font: inherit;
+    box-sizing: border-box;
+}
+
+.login-form-group input:focus {
+    outline: 2px solid #8cb9a2;
+    border-color: #8cb9a2;
+}
+
+.login-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 25px;
+}
+
+.login-cancel,
+.login-submit {
+    padding: 11px 20px;
+    border-radius: 7px;
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.login-cancel {
+    border: 1px solid #cbd2ce;
+    background-color: #fff;
+    color: #34463d;
+}
+
+.login-submit {
+    border: 1px solid #294c40;
+    background-color: #294c40;
+    color: #fff;
+}
+
+.login-switch {
+    margin: 24px 0 0;
+    text-align: center;
+    color: #666;
+    font-size: 14px;
+}
+
+.login-switch a {
+    color: #294c40;
+    font-weight: 600;
+}
+
+@media (max-width: 480px) {
+    .login-modal {
+        padding: 22px;
+    }
+}

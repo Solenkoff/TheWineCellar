@@ -16,7 +16,7 @@ export default function Home() {
             .catch(err => alert(err));
 
         return () => {
-            abortController.abort();
+            abortController.abort("Home component unmounted");
         }
     }, []);
 
