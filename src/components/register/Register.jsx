@@ -1,10 +1,10 @@
-import { useState } from "react";
 import { useNavigate } from "react-router";
 
 import styles from "./Register.module.css";
 
-export default function Register() {
-    const [user, setUser] = useState(null);
+export default function Register({
+    onRegister,
+}) {
     const navigate = useNavigate();
 
     const registerAction = (formData) => {
@@ -24,10 +24,10 @@ export default function Register() {
             return;
         }
 
-        setUser({ email }); 
+        onRegister({ email }); 
 
-         
-    }
+         navigate('/');
+    };
 
     return (
 
@@ -37,7 +37,6 @@ export default function Register() {
                 <div className={styles["register-modal"]} role="dialog" aria-modal="true" aria-labelledby="register-title">
                     <div className={styles["register-header"]}>
                         <div>
-                            {user && <p>Welcome, {user.email}!</p>}
                             <h2 id="register-title">Join the Rescue</h2>
                             <p>Create an account and help furniture find a new home.</p>
                         </div>

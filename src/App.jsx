@@ -1,4 +1,6 @@
 import { Route, Routes } from "react-router"
+import { useState } from "react"
+
 import Catalog from "./components/catalog/Catalog"
 import Footer from "./components/footer/Footer"
 import Header from "./components/header/Header"
@@ -9,19 +11,26 @@ import Login from "./components/login/Login"
 import Register from "./components/register/Register"
 
 function App() {
+    const [user, setUser] = useState(null);
+
+    const userAuthHanler = (userData) => {
+        setUser(userData);
+    }
 
     return (
         <>
 
             <Header />
 
+            {user && <p>Welcome, {user.email}!</p>}
+
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/catalog" element={<Catalog />} />
                 <Route path="/items/:itemId" element={<ItemDetails />} />
                 <Route path="/items/add" element={<ItemAdd />} />
-                <Route path="/login" element={<Login/>} />
-                <Route path="/register" element={<Register/>} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/register" element={<Register onRegister={userAuthHanler} />} />
             </Routes>
 
             <Footer />
