@@ -5,13 +5,19 @@ import request from "../../utils/request";
 import ItemCard from "../item-card/ItemCard";
 
 export default function Home() {
-
     const [latestItems, setLatestItems] = useState([]);
 
     useEffect(() => {
-        request("/items?deleted_on=is.null&order=added_on.desc&limit=3")
+        //*                Refactor  AbortController logic           ! ! !
+        const abortController = new AbortController();
+
+        request('/items?deleted_on=is.null&order=added_on.desc&limit=3', 'GET', null, { signal: abortController.signal })
             .then(setLatestItems)
             .catch(err => alert(err));
+
+        return () => {
+            abortController.abort();
+        }
     }, []);
 
 
