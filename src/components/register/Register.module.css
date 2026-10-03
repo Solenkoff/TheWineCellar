@@ -1,0 +1,134 @@
+.page-background {
+    min-height: 100vh;
+    padding: 40px;
+    background: linear-gradient(#3b5d50 180px, #f5f6f2 180px);
+    background-image: url("/images/bg-furni-01.png");
+    background-color: #eff2f1;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.register-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background-color: rgba(25, 35, 30, 0.65);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.register-modal {
+    width: 100%;
+    max-width: 460px;
+    max-height: 90vh;
+    margin-top: 80px;
+    overflow-y: auto;
+    background-color: #fdfdfb;
+    border-radius: 14px;
+    padding: 30px;
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.2);
+}
+
+.register-header {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    margin-bottom: 24px;
+}
+
+.register-header h2 {
+    margin: 0 0 8px;
+    color: #294c40;
+    font-size: 26px;
+}
+
+.register-header p {
+    margin: 0;
+    color: #666;
+    font-size: 14px;
+}
+
+.register-close {
+    border: none;
+    background: transparent;
+    color: #666;
+    font-size: 28px;
+    cursor: pointer;
+    align-self: flex-start;
+}
+
+.register-form-group {
+    margin-bottom: 18px;
+}
+
+.register-form-group label {
+    display: block;
+    margin-bottom: 7px;
+    font-weight: 600;
+    color: #333;
+}
+
+.register-form-group input {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #d2d8d4;
+    border-radius: 7px;
+    background-color: #fff;
+    font: inherit;
+    box-sizing: border-box;
+}
+
+.register-form-group input:focus {
+    outline: 2px solid #8cb9a2;
+    border-color: #8cb9a2;
+}
+
+.register-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 25px;
+}
+
+.register-cancel,
+.register-submit {
+    padding: 11px 20px;
+    border-radius: 7px;
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.register-cancel {
+    border: 1px solid #cbd2ce;
+    background-color: #fff;
+    color: #34463d;
+}
+
+.register-submit {
+    border: 1px solid #294c40;
+    background-color: #294c40;
+    color: #fff;
+}
+
+.register-switch {
+    margin: 24px 0 0;
+    text-align: center;
+    color: #666;
+    font-size: 14px;
+}
+
+.register-switch a {
+    color: #294c40;
+    font-weight: 600;
+}
+
+@media (max-width: 480px) {
+    .register-modal {
+        padding: 22px;
+    }
+}

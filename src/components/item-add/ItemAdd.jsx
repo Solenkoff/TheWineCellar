@@ -1,11 +1,11 @@
 import styles from './ItemAdd.module.css';
 
-export default function ItemAdd() {
+export default function ItemAdd() { 
     return (
 
         <div className={styles["page-background"]}>
 
-            <div className={styles["modal-overlay"]} id="modalOverlay">
+            <div className={styles["modal-overlay"]} >
                 <div
                     className={styles["listing-modal"]}
                     role="dialog"
@@ -116,6 +116,7 @@ export default function ItemAdd() {
                     </form>
                 </div>
             </div>
+
         </div>
 
     );

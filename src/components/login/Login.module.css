@@ -1,4 +1,15 @@
-/* The modal covers the page behind it. */
+
+.page-background {
+    min-height: 100vh;
+    padding: 40px;
+    background: linear-gradient(#3b5d50 180px, #f5f6f2 180px);
+    background-image: url("/images/bg-furni-01.png");
+    background-color: #eff2f1;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
 .login-overlay {
     position: fixed;
     inset: 0;

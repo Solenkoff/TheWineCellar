@@ -1,14 +1,4 @@
-/* General styles for the standalone preview */
-* {
-    box-sizing: border-box;
-}
-
-body {
-    margin: 0;
-    color: #293a31;
-    background-color: #f5f6f2;
-}
-
+ 
 .page-background {
     min-height: 100vh;
     padding: 40px;
