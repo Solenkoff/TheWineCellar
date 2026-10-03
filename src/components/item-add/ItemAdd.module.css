@@ -1,0 +1,177 @@
+/* General styles for the standalone preview */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    color: #293a31;
+    background-color: #f5f6f2;
+}
+
+.page-background {
+    min-height: 100vh;
+    padding: 40px;
+    background: linear-gradient(#3b5d50 180px, #f5f6f2 180px);
+    background-image: url("/images/bg-furni-01.png");
+    background-color: #eff2f1;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+
+/* Dark layer covering the page */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.65);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+/* The white modal */
+.listing-modal {
+    width: 100%;
+    max-width: 680px;
+    max-height: 95vh;
+    overflow-y: auto;
+    margin-top: 80px;
+    padding: 40px;
+    background-color: rgba(255, 255, 255, 0.93);
+    border-radius: 15px;
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.25);
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 25px;
+}
+
+.modal-header h2 {
+    margin: 0;
+    color: #294b3d;
+    font-weight: 600;
+}
+
+.modal-header p {
+    margin: 8px 0 0;
+    color: #6e7771;
+    font-size: 14px;
+}
+
+.close-button {
+    border: none;
+    background: none;
+    font-size: 28px;
+    color: #777;
+    cursor: pointer;
+}
+
+/* Two columns of form fields */
+.form-fields {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-group label {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #d5ded7;
+    border-radius: 8px;
+    background-color: white;
+    font: inherit;
+    font-size: 14px;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: 2px solid #87a99a;
+}
+
+.form-group textarea {
+    resize: vertical;
+}
+
+.form-group small {
+    color: #7c8780;
+    font-size: 12px;
+}
+
+.full-width {
+    grid-column: 1 / 3;
+}
+
+/* Buttons  */
+.form-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 25px;
+    padding-top: 20px;
+    border-top: 1px solid #e5e9e5;
+}
+
+.form-buttons button {
+    padding: 12px 22px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.cancel-button {
+    background-color: white;
+    color: #42584c;
+    border: 1px solid #cdd7d0;
+}
+
+.add-button {
+    background-color: #3b5d50;
+    color: white;
+    border: 1px solid #3b5d50;
+}
+
+.add-button:hover {
+    background-color: #2f4c40;
+}
+
+/* Stack the fields on smaller screens */
+@media (max-width: 540px) {
+    .listing-modal {
+        padding: 22px;
+    }
+
+    .form-fields {
+        grid-template-columns: 1fr;
+    }
+
+    .full-width {
+        grid-column: auto;
+    }
+}
