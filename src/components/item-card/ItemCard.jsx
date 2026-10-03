@@ -10,10 +10,12 @@ export default function ItemCard({
 
         <div className="col-12 col-md-4 col-lg-3 mb-5">
             <Link to={`/items/${id}`} className="product-item" >
-                <img
-                    src={images[0]}
-                    className="img-fluid product-thumbnail"
-                />
+                <div className="product-thumbnail">
+                    <img
+                        src={images[0]}
+                        className="img-fluid "
+                    />
+                </div>
                 <h3 className="product-title">{title}</h3>
                 <strong className="product-price">${price}</strong>
                 <span className="icon-cross">
@@ -25,4 +27,4 @@ export default function ItemCard({
     );
 }
 
-  
+

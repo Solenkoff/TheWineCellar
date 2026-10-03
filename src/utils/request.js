@@ -1,11 +1,12 @@
 const mainUrl = import.meta.env.VITE_SUPABASE_URL;
 const apiKey = import.meta.env.VITE_SUPABASE_PUBLISHABLE_API_KEY;
 
-export default async function request(path = '/', method = 'GET', data = null) {
+export default async function request(path = '/', method = 'GET', data = null, opts = {}) {
     const options = {
         headers: {
             apiKey,
-        }
+        },
+        ...opts
     };
 
     if (method !== 'GET') {
@@ -21,6 +22,10 @@ export default async function request(path = '/', method = 'GET', data = null) {
 
     if(!response.ok){
         throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    if( response.status === 204){
+        return null;
     }
 
     return response.json();
