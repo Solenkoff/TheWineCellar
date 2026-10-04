@@ -13,6 +13,7 @@ const initialValues = {
 }
 
 export default function ItemEdit() {
+    const navigate = useNavigate();
     const { itemId } = useParams();
     const [item, setItem] = useState(initialValues);
 
@@ -28,6 +29,13 @@ export default function ItemEdit() {
             ...state,
             [name]: name === "images" ? [value] : value
         }));
+    };
+
+    const editAction = async () => {
+       
+            const result = request(`/items?id=eq.${itemId}`, 'PUT', item);
+            
+            navigate(`/items/${itemId}`);
     };
 
 
@@ -56,7 +64,7 @@ export default function ItemEdit() {
                         </button>
                     </div>
 
-                    <form >
+                    <form action={editAction} >
                         <div className={styles["form-fields"]}>
                             <div className={styles["form-group"]}>
                                 <label htmlFor="title">Listing title *</label>

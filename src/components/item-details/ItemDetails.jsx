@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router";
+import { Link, useNavigate, useParams } from "react-router";
 import request from "../../utils/request";
 
 import styles from "./ItemDetails.module.css";
 
 export default function ItemDetails() {
     const { itemId } = useParams();
+    const navigate = useNavigate();
     const [item, setItem] = useState({});
 
     useEffect(() => {
@@ -17,13 +18,29 @@ export default function ItemDetails() {
             .catch(err => alert(err));
     }, [itemId]);
 
-    
+    const deleteItemClickHandler = async (e) => {
+        e.preventDefault();
+
+        const confirmed = confirm(`Are you sure yu want to delete ${item.title} item?`);
+
+        if (!confirmed) {
+            return;
+        }
+
+        try {
+            await request(`/items?id=eq.${itemId}`, 'DELETE');
+
+            navigate('/catalog');
+        } catch (error) {
+            alert(error.message);
+        }
+    }
 
     const isOwner = false;
     const isAdmin = false;
     const isLoggedIn = true;
 
-    const canManage = true; 
+    const canManage = true;
     const canLike = isLoggedIn && !canManage;
 
     console.log("Item:", item);
@@ -92,10 +109,13 @@ export default function ItemDetails() {
                             <div className={styles["item-details-actions"]}>
                                 {canManage && (
                                     <>
-                                        <Link to={`/items/${itemId}/edit`}  className={styles["details-btn"] + " " + styles["edit-btn"]}>
+                                        <Link to={`/items/${itemId}/edit`} className={styles["details-btn"] + " " + styles["edit-btn"]}>
                                             Edit
                                         </Link>
-                                        <button className={styles["details-btn"] + " " + styles["delete-btn"]}>
+                                        <button
+                                            className={styles["details-btn"] + " " + styles["delete-btn"]}
+                                            onClick={deleteItemClickHandler}
+                                        >
                                             Delete
                                         </button>
                                     </>
