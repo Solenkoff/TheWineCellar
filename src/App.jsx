@@ -10,6 +10,7 @@ import ItemAdd from "./components/item-add/ItemAdd"
 import Login from "./components/login/Login"
 import Register from "./components/register/Register"
 import Logout from "./components/logout/Logout"
+import ItemEdit from "./components/item-edit/ItemEdit"
 
 function App() {
     const [user, setUser] = useState(null);
@@ -31,6 +32,7 @@ function App() {
                 <Route path="/" element={<Home />} />
                 <Route path="/catalog" element={<Catalog />} />
                 <Route path="/items/:itemId" element={<ItemDetails />} />
+                <Route path="/items/:itemId/edit" element={<ItemEdit />} />
                 <Route path="/items/add" element={<ItemAdd />} />
                 <Route path="/register" element={<Register onRegister={userAuthHanler} />} />
                 <Route path="/login" element={<Login onLogin={userAuthHanler} />} />

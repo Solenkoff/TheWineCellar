@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router";
+import { Link, useParams } from "react-router";
 import request from "../../utils/request";
 
 import styles from "./ItemDetails.module.css";
@@ -17,33 +17,13 @@ export default function ItemDetails() {
             .catch(err => alert(err));
     }, [itemId]);
 
-    // if (!item) {
-    //     return <p>Loading item details...</p>;
-    // }
+    
 
-
-    // console.log(item.images[0]);
-    // Log the itemId to the console for debugging
-    // Temporary data until we connect the Details API
-    // const item = {
-    //     title: "Modern Grey Armchair",
-    //     category: "Sofas",
-    //     description: "A comfortable and stylish armchair in great condition. Perfect for a living room, bedroom or reading corner.",
-    //     images: ["/images/sofa-01.jpg"],
-    //     price: 135,
-    //     created_at: "2025-10-27",
-    //     owner_name: "JohnDoe",
-    //     status: "available",   
-    //     likes_count: 12,
-    // };
-
-    // Temporary values for testing the layout
     const isOwner = false;
     const isAdmin = false;
     const isLoggedIn = true;
 
-    // const canManage = isOwner || isAdmin;
-    const canManage = true; // Temporary value for testing the layout
+    const canManage = true; 
     const canLike = isLoggedIn && !canManage;
 
     console.log("Item:", item);
@@ -112,9 +92,9 @@ export default function ItemDetails() {
                             <div className={styles["item-details-actions"]}>
                                 {canManage && (
                                     <>
-                                        <button className={styles["details-btn"] + " " + styles["edit-btn"]}>
+                                        <Link to={`/items/${itemId}/edit`}  className={styles["details-btn"] + " " + styles["edit-btn"]}>
                                             Edit
-                                        </button>
+                                        </Link>
                                         <button className={styles["details-btn"] + " " + styles["delete-btn"]}>
                                             Delete
                                         </button>
