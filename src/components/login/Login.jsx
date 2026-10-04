@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router';
+import { useNavigate , Link } from 'react-router';
 import styles from './Login.module.css'
 
 export default function Login({
@@ -7,18 +7,19 @@ export default function Login({
     const navigate = useNavigate();
 
     const submitAction = (formData) => {
-        const {email, password} = Object.fromEntries(formData);
+        const { email, password } = Object.fromEntries(formData);
 
-        if(!email || !password){
+        if (!email || !password) {
             alert('Email and password are required!');
+            return;
         }
-        
-        onLogin({email});
+
+        onLogin({ email });
 
         navigate('/');
     }
 
-    return ( 
+    return (
 
         <div className={styles["page-background"]}>
 
@@ -46,7 +47,9 @@ export default function Login({
                             <button type="submit" className={styles["login-submit"]}>Log In</button>
                         </div>
                     </form>
-                    <p className={styles["login-switch"]}>New here? <a href="/register">Create an account</a></p>
+                    <p className={styles["login-switch"]}>New here?
+                        <Link to="/register">Create an account</Link>
+                    </p>
                 </div>
             </div>
 

@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 
 import styles from "./Register.module.css";
 
@@ -17,16 +17,16 @@ export default function Register({
         if (!username || !email || !password || !confirmPassword) {
             alert('All fields are required!');
             return;
-        } 
+        }
 
         if (password !== confirmPassword) {
             alert('Passwords do not match!');
             return;
         }
 
-        onRegister({ email }); 
+        onRegister({ email });
 
-         navigate('/');
+        navigate('/');
     };
 
     return (
@@ -65,7 +65,9 @@ export default function Register({
                             <button type="submit" className={styles["register-submit"]}>Create Account</button>
                         </div>
                     </form>
-                    <p className={styles["register-switch"]}>Already registered? <a href="/login">Log in</a></p>
+                    <p className={styles["register-switch"]}>Already registered?
+                        <Link to="/login">Log in</Link>
+                    </p>
                 </div>
             </div>
 

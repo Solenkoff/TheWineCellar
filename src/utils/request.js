@@ -5,6 +5,7 @@ export default async function request(path = '/', method = 'GET', data = null, o
     const options = {
         headers: {
             apiKey,
+            Prefer: "return=representation"
         },
         ...opts
     };
@@ -20,13 +21,14 @@ export default async function request(path = '/', method = 'GET', data = null, o
 
     const response = await fetch(`${mainUrl}${path}`, options);
 
-    if(!response.ok){
+    if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
     }
 
-    if( response.status === 204){
+    if (response.status === 204) {
         return null;
     }
 
     return response.json();
+
 } 

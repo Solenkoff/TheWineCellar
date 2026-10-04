@@ -12,7 +12,6 @@ import Register from "./components/register/Register"
 import Logout from "./components/logout/Logout"
 
 function App() {
-    const navigate = useNavigate();
     const [user, setUser] = useState(null);
 
     const userAuthHanler = (userData) => {

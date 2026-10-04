@@ -1,6 +1,44 @@
-import styles from './ItemAdd.module.css';
+import { useState } from 'react';
+import { useNavigate } from 'react-router';
 
-export default function ItemAdd() { 
+import styles from './ItemAdd.module.css';
+import request from '../../utils/request';
+
+const initialValues = {
+    title: "",
+    category: "",
+    price: "",
+    description: "",
+    images: [],
+}
+
+export default function ItemAdd() {
+    const [values, setValues] = useState(initialValues);
+    const navigate = useNavigate();
+
+    const changeHandler = (e) => {
+        const { name, value } = e.target;
+
+        setValues(state => ({
+            ...state,
+            [name]: name === "images" ? [value] : value
+        }));
+    };
+
+
+    const submitAction = async () => {
+        try {
+            await request("/items", "POST", {
+                ...values,
+                price: Number(values.price)
+            });
+
+            navigate('/');
+        } catch (error) {
+            alert(error.message);
+        }
+    };
+
     return (
 
         <div className={styles["page-background"]}>
@@ -26,7 +64,7 @@ export default function ItemAdd() {
                         </button>
                     </div>
 
-                    <form >
+                    <form action={submitAction}>
                         <div className={styles["form-fields"]}>
                             <div className={styles["form-group"]}>
                                 <label htmlFor="title">Listing title *</label>
@@ -36,29 +74,37 @@ export default function ItemAdd() {
                                     name="title"
                                     placeholder="e.g. Vintage wooden coffee table"
                                     required
+                                    value={values.title}
+                                    onChange={changeHandler}
                                 />
                             </div>
 
                             <div className={styles["form-group"]}>
                                 <label htmlFor="category">Category *</label>
-                                <select id="category" name="category" required defaultValue="">
+                                <select
+                                    id="category"
+                                    name="category"
+                                    required
+                                    value={values.category}
+                                    onChange={changeHandler}
+                                >
                                     <option value="" disabled>
                                         Select a category
                                     </option>
-                                    <option>Living Room</option>
-                                    <option>Bedroom</option>
-                                    <option>Bathroom</option>
-                                    <option>Dining</option>
-                                    <option>Office</option>
-                                    <option>Café &amp; Bar</option>
-                                    <option>Baby &amp; Children</option>
-                                    <option>Garden &amp; Outdoor</option>
-                                    <option>TV &amp; Media</option>
-                                    <option>Storage units &amp; cabinets</option>
-                                    <option>Bookcases &amp; shelving units</option>
-                                    <option>Decoration</option>
-                                    <option>Lighting</option>
-                                    <option>Other</option>
+                                    <option value="living-room">Living Room</option>
+                                    <option value="bedroom">Bedroom</option>
+                                    <option value="bathroom">Bathroom</option>
+                                    <option value="dining">Dining</option>
+                                    <option value="office">Office</option>
+                                    <option value="cafe-bar">Café &amp; Bar</option>
+                                    <option value="baby-children">Baby &amp; Children</option>
+                                    <option value="garden-outdoor">Garden &amp; Outdoor</option>
+                                    <option value="tv-media">TV &amp; Media</option>
+                                    <option value="storage-cabinets">Storage units &amp; cabinets</option>
+                                    <option value="bookcases-shelves">Bookcases &amp; shelving units</option>
+                                    <option value="decoration">Decoration</option>
+                                    <option value="lighting">Lighting</option>
+                                    <option value="other">Other</option>
                                 </select>
                             </div>
 
@@ -72,6 +118,8 @@ export default function ItemAdd() {
                                     step="0.01"
                                     placeholder="e.g. 25"
                                     required
+                                    value={values.price}
+                                    onChange={changeHandler}
                                 />
                             </div>
 
@@ -80,9 +128,11 @@ export default function ItemAdd() {
                                 <input
                                     type="url"
                                     id="image"
-                                    name="image"
+                                    name="images"
                                     placeholder="https://example.com/furniture.jpg"
                                     required
+                                    value={values.images[0] || ""}
+                                    onChange={changeHandler}
                                 />
                             </div>
 
@@ -94,7 +144,8 @@ export default function ItemAdd() {
                                     rows={4}
                                     placeholder="Describe the item, its condition, dimensions, and anything a rescuer should know..."
                                     required
-                                    defaultValue=""
+                                    value={values.description}
+                                    onChange={changeHandler}
                                 />
                                 <small>
                                     A little detail helps someone decide whether it's the right fit.
