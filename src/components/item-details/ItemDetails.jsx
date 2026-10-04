@@ -1,10 +1,14 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router";
+
 import request from "../../utils/request";
+import CommentList from "../comment-list/CommentList";
 
 import styles from "./ItemDetails.module.css";
 
-export default function ItemDetails() {
+export default function ItemDetails({
+    user,
+}) {
     const { itemId } = useParams();
     const navigate = useNavigate();
     const [item, setItem] = useState({});
@@ -127,6 +131,11 @@ export default function ItemDetails() {
                                     </button>
                                 )}
                             </div>
+
+                            <CommentList
+                                itemId={itemId}
+                                user={user}
+                            />
                         </div>
 
                     </div>
