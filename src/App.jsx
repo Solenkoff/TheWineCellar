@@ -12,6 +12,8 @@ import Register from "./components/register/Register"
 import Logout from "./components/logout/Logout"
 import ItemEdit from "./components/item-edit/ItemEdit"
 import ScrollToTop from "./components/ui/scroll-to-top/ScrollToTop"
+import BackToTop from "./components/ui/back-to-top/BackToTop"
+
 
 function App() {
     const [user, setUser] = useState(null);
@@ -41,6 +43,8 @@ function App() {
                 <Route path="/login" element={<Login onLogin={userAuthHanler} />} />
                 <Route path="/logout" element={<Logout onLogout={logoutAction} />} />
             </Routes>
+
+            <BackToTop />
 
             <Footer /> 
 

@@ -1,0 +1,27 @@
+.back-to-top {
+    position: fixed;
+    bottom: 80px;
+    right: 80px;
+    width: 50px;
+    height: 52px;
+    border: none;
+    border-radius: 38%;
+    background-color: #3b5d50;
+    color: white;
+    font-size: 32px;
+    line-height: 1;
+    cursor: pointer;
+    z-index: 1000;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    transition: background-color 0.2s, transform 0.2s;
+}
+
+.back-to-top:hover {
+    background-color: #2f4a40;
+    transform: translateY(-4px);
+}
+
+.back-to-top:focus-visible {
+    outline: 3px solid #f9bf29;
+    outline-offset: 3px;
+}
