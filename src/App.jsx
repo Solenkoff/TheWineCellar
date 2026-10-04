@@ -11,6 +11,7 @@ import Login from "./components/login/Login"
 import Register from "./components/register/Register"
 import Logout from "./components/logout/Logout"
 import ItemEdit from "./components/item-edit/ItemEdit"
+import ScrollToTop from "./components/ui/scroll-to-top/ScrollToTop"
 
 function App() {
     const [user, setUser] = useState(null);
@@ -27,6 +28,8 @@ function App() {
         <>
 
             <Header isAuthenticated={!!user} />
+
+            <ScrollToTop />
 
             <Routes>
                 <Route path="/" element={<Home />} />

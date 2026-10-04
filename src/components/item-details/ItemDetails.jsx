@@ -21,7 +21,7 @@ export default function ItemDetails() {
     const deleteItemClickHandler = async (e) => {
         e.preventDefault();
 
-        const confirmed = confirm(`Are you sure yu want to delete ${item.title} item?`);
+        const confirmed = confirm(`Are you sure you want to delete ${item.title} item?`);
 
         if (!confirmed) {
             return;
