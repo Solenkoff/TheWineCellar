@@ -26,12 +26,16 @@ export default function Register({
 
         onRegister({ username, email, password });
 
+
+    };
+
+    const cancelHandler = () => {
         navigate('/');
     };
 
     return (
 
-        <div className={styles["page-background"]}>
+        <div className={styles["page-background"]} >
 
             <div className={styles["register-overlay"]}>
                 <div className={styles["register-modal"]} role="dialog" aria-modal="true" aria-labelledby="register-title">
@@ -40,7 +44,14 @@ export default function Register({
                             <h2 id="register-title">Join the Rescue</h2>
                             <p>Create an account and help furniture find a new home.</p>
                         </div>
-                        <button type="button" className={styles["register-close"]} aria-label="Close">×</button>
+                        <button
+                            type="button"
+                            className={styles["register-close"]}
+                            aria-label="Close"
+                            onClick={cancelHandler}
+                        >
+                            ×
+                        </button>
                     </div>
 
                     <form action={registerAction}>
@@ -61,8 +72,14 @@ export default function Register({
                             <input type="password" id="register-confirm" name="confirm-password" placeholder="Repeat your password" required />
                         </div>
                         <div className={styles["register-buttons"]}>
-                            <button type="button" className={styles["register-cancel"]} >Cancel</button>
-                            <button type="submit" className={styles["register-submit"]}>Create Account</button>
+                            <button
+                                type="button"
+                                className={styles["register-cancel"]}
+                                onClick={cancelHandler}
+                            >
+                                Cancel
+                            </button>
+                            <button type="button" className={styles["register-submit"]}>Create Account</button>
                         </div>
                     </form>
                     <p className={styles["register-switch"]}>Already registered?

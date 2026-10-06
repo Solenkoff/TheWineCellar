@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router';
+import { useNavigate, useParams } from 'react-router';
 
 import styles from './ItemAdd.module.css';
 import request from '../../utils/request';
@@ -15,6 +15,7 @@ const initialValues = {
 export default function ItemAdd() {
     const [values, setValues] = useState(initialValues);
     const navigate = useNavigate();
+    const { itemId } = useParams();
 
     const changeHandler = (e) => {
         const { name, value } = e.target;
@@ -24,7 +25,6 @@ export default function ItemAdd() {
             [name]: name === "images" ? [value] : value
         }));
     };
-
 
     const submitAction = async () => {
         try {
@@ -37,6 +37,10 @@ export default function ItemAdd() {
         } catch (error) {
             alert(error.message);
         }
+    };
+
+    const cancelHandler = () => {
+         navigate('/catalog');
     };
 
     return (
@@ -59,6 +63,7 @@ export default function ItemAdd() {
                             type="button"
                             className={styles["close-button"]}
                             aria-label="Close"
+                            onClick={cancelHandler}
                         >
                             ×
                         </button>
@@ -157,6 +162,7 @@ export default function ItemAdd() {
                             <button
                                 type="button"
                                 className={styles["cancel-button"]}
+                                onClick={cancelHandler}
                             >
                                 Cancel
                             </button>

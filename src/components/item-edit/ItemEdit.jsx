@@ -17,10 +17,10 @@ export default function ItemEdit() {
     const { itemId } = useParams();
     const [item, setItem] = useState(initialValues);
 
-      useEffect(() => {
+    useEffect(() => {
         request(`/items?id=eq.${itemId}`)
-        .then(data => setItem(data[0]))
-      }, [itemId]);
+            .then(data => setItem(data[0]))
+    }, [itemId]);
 
     const changeHandler = (e) => {
         const { name, value } = e.target;
@@ -32,10 +32,14 @@ export default function ItemEdit() {
     };
 
     const editAction = async () => {
-       
-            const result = request(`/items?id=eq.${itemId}`, 'PUT', item);
-            
-            navigate(`/items/${itemId}`);
+
+        const result = request(`/items?id=eq.${itemId}`, 'PUT', item);
+
+        navigate(`/items/${itemId}`);
+    };
+
+    const cancelHandler = () => {
+        navigate(`/items/${itemId}`);
     };
 
 
@@ -59,6 +63,7 @@ export default function ItemEdit() {
                             type="button"
                             className={styles["close-button"]}
                             aria-label="Close"
+                            onClick={cancelHandler}
                         >
                             ×
                         </button>
@@ -157,6 +162,7 @@ export default function ItemEdit() {
                             <button
                                 type="button"
                                 className={styles["cancel-button"]}
+                                onClick={cancelHandler}
                             >
                                 Cancel
                             </button>

@@ -1,4 +1,4 @@
-import { useNavigate , Link } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 import styles from './Login.module.css'
 
 export default function Login({
@@ -14,15 +14,17 @@ export default function Login({
             return;
         }
 
-        onLogin({ email });
         onLogin({ email, password });
 
-        navigate('/');
     }
+
+    const cancelHandler = () => {
+        navigate('/');
+    };
 
     return (
 
-        <div className={styles["page-background"]}>
+        <div className={styles["page-background"]} >
 
             <div className={styles["login-overlay"]}>
                 <div className={styles["login-modal"]} role="dialog" aria-modal="true" aria-labelledby="login-title">
@@ -31,7 +33,14 @@ export default function Login({
                             <h2 id="login-title">Welcome Back</h2>
                             <p>Log in to continue giving furniture a second life.</p>
                         </div>
-                        <button type="button" className={styles["login-close"]} aria-label="Close">×</button>
+                        <button
+                            type="button"
+                            className={styles["login-close"]}
+                            aria-label="Close"
+                            onClick={cancelHandler}
+                        >
+                            ×
+                        </button>
                     </div>
 
                     <form action={submitAction}>
@@ -44,7 +53,7 @@ export default function Login({
                             <input type="password" id="login-password" name="password" placeholder="Enter your password" required />
                         </div>
                         <div className={styles["login-buttons"]}>
-                            <button type="button" className={styles["login-cancel"]} >Cancel</button>
+                            <button type="button" className={styles["login-cancel"]} onClick={cancelHandler} >Cancel</button>
                             <button type="submit" className={styles["login-submit"]}>Log In</button>
                         </div>
                     </form>
