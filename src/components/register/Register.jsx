@@ -24,7 +24,7 @@ export default function Register({
             return;
         }
 
-        onRegister({ email });
+        onRegister({ username, email, password });
 
         navigate('/');
     };

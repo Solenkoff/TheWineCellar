@@ -13,13 +13,21 @@ import Logout from "./components/logout/Logout"
 import ItemEdit from "./components/item-edit/ItemEdit"
 import ScrollToTop from "./components/ui/scroll-to-top/ScrollToTop"
 import BackToTop from "./components/ui/back-to-top/BackToTop"
+import { register } from "./api/auth-api"
 
 
 function App() {
-    const [user, setUser] = useState(null);
+    const [auth, setAuth] = useState(null);
 
-    const userAuthHanler = (userData) => {
-        setUser(userData);    
+    const userAuthHandler = async (userData) => {
+        try {
+            const result = await register(userData);
+            
+            setAuth(result);
+            
+        } catch (error) {
+            alert(error.message);
+        }    
     };
 
     const logoutAction = () => {
@@ -39,8 +47,8 @@ function App() {
                 <Route path="/items/:itemId" element={<ItemDetails user={user} />} />
                 <Route path="/items/:itemId/edit" element={<ItemEdit />} />
                 <Route path="/items/add" element={<ItemAdd />} />
-                <Route path="/register" element={<Register onRegister={userAuthHanler} />} />
-                <Route path="/login" element={<Login onLogin={userAuthHanler} />} />
+                <Route path="/register" element={<Register onRegister={userAuthHandler} />} />
+                <Route path="/login" element={<Login onLogin={userAuthHandler} />} />
                 <Route path="/logout" element={<Logout onLogout={logoutAction} />} />
             </Routes>
 

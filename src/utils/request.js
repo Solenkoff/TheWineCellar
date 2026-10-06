@@ -1,7 +1,10 @@
-const mainUrl = import.meta.env.VITE_SUPABASE_URL;
+const restUrl = import.meta.env.VITE_SUPABASE_REST_URL;
+const authUrl = import.meta.env.VITE_SUPABASE_AUTH_URL;
 const apiKey = import.meta.env.VITE_SUPABASE_PUBLISHABLE_API_KEY;
 
-export default async function request(path = '/', method = 'GET', data = null, opts = {}) {
+//*  ToDo  ->   Image Upload
+
+async function baseRequest(url, path = '/', method = 'GET', data = null, opts = {}) {
     const options = {
         headers: {
             apiKey,
@@ -19,7 +22,7 @@ export default async function request(path = '/', method = 'GET', data = null, o
         options.body = JSON.stringify(data);
     }
 
-    const response = await fetch(`${mainUrl}${path}`, options);
+    const response = await fetch(`${url}${path}`, options);
 
     if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
@@ -30,5 +33,12 @@ export default async function request(path = '/', method = 'GET', data = null, o
     }
 
     return response.json();
+}
 
-} 
+export default async function request(path = '/', method = 'GET', data = null, opts = {}) {
+    return baseRequest(restUrl, path , method, data, opts);
+}
+
+export const authRequest = async (path = '/', method = 'GET', data = null, opts = {}) => {
+    return baseRequest(authUrl, path , method, data, opts);
+}
