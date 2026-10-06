@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CommentCard from "./comment-card/CommentCard";
 
 import styles from "./CommentList.module.css";
@@ -8,40 +8,39 @@ export default function CommentList({
     itemId,
     user,
 }) {
+    const [comments, setComments] = useState([]);
     const [isAdding, setIsAdding] = useState(false);
-    const [commentText, setCommentText] = useState("");
 
-    const comments = [
-        {
-            id: 1,
-            author: "Pesho",
-            text: "Is this chair still available?",
-            created_at: "October 21, 2026 - 14:30"
-        },
-        {
-            id: 2,
-            author: "Gana",
-            text: "Would you consider a lower price?",
-            created_at: "October 20, 2026 - 19:15"
-        },
-        {
-            id: 3,
-            author: "Taralianku",
-            text: "Beautiful vintage chair!",
-            created_at: "October 19, 2026 - 11:05"
-        }
-    ];
+    useEffect(() => {
+        request(`/comments?item_id=eq.${itemId}&order=created_at.desc`)
+            .then(result => {
+                setComments(result);
+            })
+            .catch(error => {
+                alert(error.message);
+            });
+    }, [itemId]);
+
 
     const addCommentAction = async (formData) => {
+        const text = formData.get('text')?.trim();
+
+        if (!text) {
+            alert('Please enter a comment.');
+            return;
+        }
+
         const newComment = {
-            text: formData.get('text'),
+            text: text,
             author: user.email,
             item_id: itemId,
         }
 
         try {
-            await request('/comments', 'POST', newComment);
-            
+            const result = await request('/comments', 'POST', newComment);
+
+            setComments(state => [result[0], ...state]);
+            setIsAdding(false);
         } catch (error) {
             alert(error.message);
         }
@@ -53,16 +52,28 @@ export default function CommentList({
                 Comments:
             </h3>
 
+
             <div className={styles["comments-layout"]}>
 
-                <div className={styles["comments-list"]}>
-                    {comments.map(comment => (
-                        <CommentCard
-                            key={comment.id}
-                            comment={comment}
-                        />
-                    ))}
-                </div>
+                {comments.length > 0
+                    ?
+                    <div className={styles["comments-list"]}>
+                        {comments.map(comment => (
+                            <CommentCard
+                                key={comment.id}
+                                comment={comment}
+                            />
+                        ))}
+                    </div>
+                    :
+                    <div className={styles["no-comment-yet"]}>
+                        <p >No comments on this piece yet.</p>
+                        {user && (
+                            <p >Be the first to share your thoughts or ask the owner a question!</p>
+                        )}
+                    </div>
+                }
+
 
                 {user && (
                     <div className={styles["comments-add-area"]}>
@@ -83,6 +94,7 @@ export default function CommentList({
                                 <textarea
                                     name="text"
                                     placeholder="Comment..."
+                                    required
                                 />
 
                                 <div className={styles["comment-form-actions"]}>

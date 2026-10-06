@@ -1,7 +1,9 @@
 import styles from "./CommentCard.module.css";
 
 
-export default function CommentCard({ comment }) {
+export default function CommentCard({
+    comment,
+}) {
     return (
         <div className={styles["comment-card"]}>
 
