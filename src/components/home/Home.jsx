@@ -49,7 +49,7 @@ export default function Home() {
                         </div>
                         <div className="col-lg-7">
                             <div className="hero-img-wrap">
-                                <img src="/public/images/couch.png" className="img-fluid" />
+                                <img src="/images/couch.png" className="img-fluid" />
                             </div>
                         </div>
                     </div>
@@ -104,7 +104,7 @@ export default function Home() {
                                     <div className="feature">
                                         <div className="icon">
                                             <img
-                                                src="/public/images/truck.svg"
+                                                src="/images/truck.svg"
                                                 alt="Image"
                                                 className="imf-fluid"
                                             />
@@ -120,7 +120,7 @@ export default function Home() {
                                     <div className="feature">
                                         <div className="icon">
                                             <img
-                                                src="/public/images/bag.svg"
+                                                src="/images/bag.svg"
                                                 alt="Image"
                                                 className="imf-fluid"
                                             />
@@ -136,7 +136,7 @@ export default function Home() {
                                     <div className="feature">
                                         <div className="icon">
                                             <img
-                                                src="/public/images/support.svg"
+                                                src="/images/support.svg"
                                                 alt="Image"
                                                 className="imf-fluid"
                                             />
@@ -152,7 +152,7 @@ export default function Home() {
                                     <div className="feature">
                                         <div className="icon">
                                             <img
-                                                src="/public/images/return.svg"
+                                                src="/images/return.svg"
                                                 alt="Image"
                                                 className="imf-fluid"
                                             />
@@ -169,7 +169,7 @@ export default function Home() {
                         <div className="col-lg-5">
                             <div className="img-wrap">
                                 <img
-                                    src="/public/images/why-choose-us-img.jpg"
+                                    src="/images/why-choose-us-img.jpg"
                                     alt="Image"
                                     className="img-fluid"
                                 />
@@ -218,7 +218,7 @@ export default function Home() {
                                                     <div className="author-info">
                                                         <div className="author-pic">
                                                             <img
-                                                                src="/public/images/person-1.png"
+                                                                src="/images/person-1.png"
                                                                 alt="Maria Jones"
                                                                 className="img-fluid"
                                                             />
@@ -251,7 +251,7 @@ export default function Home() {
                                                     <div className="author-info">
                                                         <div className="author-pic">
                                                             <img
-                                                                src="/public/images/person-1.png"
+                                                                src="/images/person-1.png"
                                                                 alt="Maria Jones"
                                                                 className="img-fluid"
                                                             />
@@ -284,7 +284,7 @@ export default function Home() {
                                                     <div className="author-info">
                                                         <div className="author-pic">
                                                             <img
-                                                                src="/public/images/person-1.png"
+                                                                src="/images/person-1.png"
                                                                 alt="Maria Jones"
                                                                 className="img-fluid"
                                                             />
@@ -325,7 +325,7 @@ export default function Home() {
                             <div className="post-entry">
                                 <a href="#" className="post-thumbnail">
                                     <img
-                                        src="/public/images/post-1.jpg"
+                                        src="/images/post-1.jpg"
                                         alt="Image"
                                         className="img-fluid"
                                     />
@@ -349,7 +349,7 @@ export default function Home() {
                             <div className="post-entry">
                                 <a href="#" className="post-thumbnail">
                                     <img
-                                        src="/public/images/post-2.jpg"
+                                        src="/images/post-2.jpg"
                                         alt="Image"
                                         className="img-fluid"
                                     />
@@ -373,7 +373,7 @@ export default function Home() {
                             <div className="post-entry">
                                 <a href="#" className="post-thumbnail">
                                     <img
-                                        src="/public/images/post-3.jpg"
+                                        src="/images/post-3.jpg"
                                         alt="Image"
                                         className="img-fluid"
                                     />
