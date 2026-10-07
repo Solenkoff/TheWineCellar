@@ -16,6 +16,14 @@ export const addItem = (data, accessToken) => {
     });
 }
 
+export const update = (itemId, data, accessToken) => {
+    return request(`/items?id=eq.${itemId}`, "PUT", data, {
+        headers: {
+            ...getAuthHeader(accessToken)
+        }
+    });
+}
+
 export const remove = async ( itemId, accessToken ) => {
     return request(`/items?id=eq.${itemId}`, "DELETE", null, {
         headers: {

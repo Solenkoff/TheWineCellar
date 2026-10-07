@@ -1,8 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router';
 
 import styles from './ItemEdit.module.css';
 import request from '../../utils/request';
+import AuthContext from '../../contexts/auth-context';
+import { itemApi } from '../../api';
 
 const initialValues = {
     title: "",
@@ -13,6 +15,7 @@ const initialValues = {
 }
 
 export default function ItemEdit() {
+    const { accessToken } = useContext(AuthContext);
     const navigate = useNavigate();
     const { itemId } = useParams();
     const [item, setItem] = useState(initialValues);
@@ -33,9 +36,13 @@ export default function ItemEdit() {
 
     const editAction = async () => {
 
-        const result = request(`/items?id=eq.${itemId}`, 'PUT', item);
+        try {
+            await itemApi.update(itemId, item, accessToken);
 
-        navigate(`/items/${itemId}`);
+            navigate(`/items/${itemId}`);
+        } catch (error) {
+            alert(error.message);
+        }
     };
 
     const cancelHandler = () => {
