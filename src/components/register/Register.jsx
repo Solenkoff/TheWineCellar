@@ -25,8 +25,6 @@ export default function Register({
         }
 
         onRegister({ username, email, password });
-
-
     };
 
     const cancelHandler = () => {

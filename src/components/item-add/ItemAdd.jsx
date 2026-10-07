@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { useNavigate, useParams } from 'react-router';
 
 import styles from './ItemAdd.module.css';
-import request from '../../utils/request';
+import AuthContext from '../../contexts/auth-context';
+import { itemApi } from '../../api';
 
 const initialValues = {
     title: "",
@@ -13,6 +14,7 @@ const initialValues = {
 }
 
 export default function ItemAdd() {
+    const { accessToken } = useContext(AuthContext);
     const [values, setValues] = useState(initialValues);
     const navigate = useNavigate();
     const { itemId } = useParams();
@@ -28,10 +30,7 @@ export default function ItemAdd() {
 
     const submitAction = async () => {
         try {
-            await request("/items", "POST", {
-                ...values,
-                price: Number(values.price)
-            });
+            await itemApi.addItem(values, accessToken);
 
             navigate('/');
         } catch (error) {
