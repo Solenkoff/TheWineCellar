@@ -15,6 +15,7 @@ import Logout from "./components/logout/Logout"
 import ItemEdit from "./components/item-edit/ItemEdit"
 import ScrollToTop from "./components/ui/scroll-to-top/ScrollToTop"
 import BackToTop from "./components/ui/back-to-top/BackToTop"
+import AuthContext from "./contexts/auth-context"
 
 
 function App() {
@@ -30,7 +31,7 @@ function App() {
             navigate('/');
         } catch (error) {
             alert(error.message);
-        }   
+        }
     };
 
     const loginAction = async (userData) => {
@@ -49,8 +50,16 @@ function App() {
         setAuth(null);
     };
 
+    const contextValue = {
+        accessToken: auth?.access_token,
+        user: auth?.user,
+        isAuthenticated: !!auth,
+        registerAction,
+        loginAction,
+    }
+
     return (
-        <>
+        <AuthContext.Provider value={ contextValue }>
 
             <Header isAuthenticated={!!auth?.user} />
 
@@ -71,7 +80,7 @@ function App() {
 
             <Footer />
 
-        </>
+        </AuthContext.Provider>
 
     )
 }
