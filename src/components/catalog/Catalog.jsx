@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
-import request from "../../utils/request";
 import ItemCard from "../item-card/ItemCard";
+import { itemApi } from "../../api";
 
 export default function Catalog() {
     const [items, setItems] = useState([]);
 
     useEffect(() => {
-        request('/items?order=added_on.desc')
+        itemApi.getAll()
             .then(setItems)
             .catch(err => alert(err));
     }, []);

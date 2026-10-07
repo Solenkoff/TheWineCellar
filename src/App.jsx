@@ -1,6 +1,8 @@
 import { Route, Routes, useNavigate } from "react-router"
 import { useState } from "react"
 
+import { authApi } from "./api"
+
 import Catalog from "./components/catalog/Catalog"
 import Footer from "./components/footer/Footer"
 import Header from "./components/header/Header"
@@ -13,14 +15,13 @@ import Logout from "./components/logout/Logout"
 import ItemEdit from "./components/item-edit/ItemEdit"
 import ScrollToTop from "./components/ui/scroll-to-top/ScrollToTop"
 import BackToTop from "./components/ui/back-to-top/BackToTop"
-import { authApi } from "./api"
 
 
 function App() {
     const navigate = useNavigate();
     const [auth, setAuth] = useState(null);
 
-    const registerHandler = async (userData) => {
+    const registerAction = async (userData) => {
         try {
             const result = await authApi.register(userData);
 
@@ -29,10 +30,10 @@ function App() {
             navigate('/');
         } catch (error) {
             alert(error.message);
-        }
+        }   
     };
 
-    const loginHandler = async (userData) => {
+    const loginAction = async (userData) => {
         try {
             const result = await authApi.login(userData);
 
@@ -61,8 +62,8 @@ function App() {
                 <Route path="/items/:itemId" element={<ItemDetails user={auth?.user} />} />
                 <Route path="/items/:itemId/edit" element={<ItemEdit />} />
                 <Route path="/items/add" element={<ItemAdd />} />
-                <Route path="/register" element={<Register onRegister={registerHandler} />} />
-                <Route path="/login" element={<Login onLogin={loginHandler} />} />
+                <Route path="/register" element={<Register onRegister={registerAction} />} />
+                <Route path="/login" element={<Login onLogin={loginAction} />} />
                 <Route path="/logout" element={<Logout onLogout={logoutAction} />} />
             </Routes>
 

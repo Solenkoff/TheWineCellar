@@ -6,16 +6,17 @@ const apiKey = import.meta.env.VITE_SUPABASE_PUBLISHABLE_API_KEY;
 
 async function baseRequest(url, path = '/', method = 'GET', data = null, opts = {}) {
     const options = {
+        ...opts,
         headers: {
+            ...opts.headers,
             apiKey,
-            Prefer: "return=representation"
+            Prefer: "return=representation",
         },
-        ...opts
     };
 
     if (method !== 'GET') {
         options.method = method;
-    }
+    } 
 
     if (data) {
         options.headers["Content-Type"] = "application/json";
@@ -32,7 +33,7 @@ async function baseRequest(url, path = '/', method = 'GET', data = null, opts = 
         return null;
     }
 
-    return response.json();
+    return response.json(); 
 }
 
 export default async function request(path = '/', method = 'GET', data = null, opts = {}) {

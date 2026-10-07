@@ -6,7 +6,7 @@ export default function Register({
     onRegister,
 }) {
     const navigate = useNavigate();
-
+ 
     const registerAction = (formData) => {
 
         const username = formData.get("username");
@@ -79,7 +79,7 @@ export default function Register({
                             >
                                 Cancel
                             </button>
-                            <button type="button" className={styles["register-submit"]}>Create Account</button>
+                            <button type="submit" className={styles["register-submit"]}>Create Account</button>
                         </div>
                     </form>
                     <p className={styles["register-switch"]}>Already registered?
