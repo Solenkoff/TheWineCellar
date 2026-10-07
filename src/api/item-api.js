@@ -16,9 +16,18 @@ export const addItem = (data, accessToken) => {
     });
 }
 
+export const remove = async ( itemId, accessToken ) => {
+    return request(`/items?id=eq.${itemId}`, "DELETE", null, {
+        headers: {
+            ...getAuthHeader(accessToken)
+        }
+    });
+}
+
 
 function getAuthHeader(accessToken) {
     return {
         ...(accessToken ? { Authorization: `Bearer ${accessToken}` } : {})
     }
-} 
+}
+

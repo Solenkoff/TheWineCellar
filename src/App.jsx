@@ -68,7 +68,7 @@ function App() {
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/catalog" element={<Catalog />} />
-                <Route path="/items/:itemId" element={<ItemDetails user={auth?.user} />} />
+                <Route path="/items/:itemId" element={<ItemDetails />} />
                 <Route path="/items/:itemId/edit" element={<ItemEdit />} />
                 <Route path="/items/add" element={<ItemAdd />} />
                 <Route path="/register" element={<Register onRegister={registerAction} />} />

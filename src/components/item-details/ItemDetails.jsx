@@ -1,14 +1,15 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router";
 
 import request from "../../utils/request";
 import CommentList from "../comment-list/CommentList";
 
 import styles from "./ItemDetails.module.css";
+import AuthContext from "../../contexts/auth-context";
+import { itemApi } from "../../api";
 
-export default function ItemDetails({
-    user,
-}) {
+export default function ItemDetails() {
+    const {user, accessToken} = useContext(AuthContext);
     const { itemId } = useParams();
     const navigate = useNavigate();
     const [item, setItem] = useState({});
@@ -31,10 +32,12 @@ export default function ItemDetails({
             return;
         }
 
-        try {
-            await request(`/items?id=eq.${itemId}`, 'DELETE');
+        console.log('Access token exists:', !!accessToken);
 
-            navigate('/catalog');
+        try {
+            await itemApi.remove(itemId, accessToken);
+
+            navigate('/catalog'); 
         } catch (error) {
             alert(error.message);
         }
@@ -101,12 +104,12 @@ export default function ItemDetails({
                             <div className={styles["item-info-row"]}>
                                 <strong>Listed by:</strong>
                                 <span>Pesho</span>
-                            </div>
+                            </div> 
 
                             <div className={styles["item-info-row"]}>
                                 <strong>Status:</strong>
                                 <span className={styles["text-capitalize"]}>
-                                    {item.status}
+                                    {item.status}  
                                 </span>
                             </div>
 
