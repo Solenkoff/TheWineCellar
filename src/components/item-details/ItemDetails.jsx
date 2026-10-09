@@ -14,6 +14,8 @@ export default function ItemDetails() {
     const navigate = useNavigate();
     const [item, setItem] = useState({});
 
+    const isOwner = user && user?.id === item?.owner_id; 
+
     useEffect(() => {
         request(`/items?id=eq.${itemId}`)
             .then(result => {
@@ -42,17 +44,6 @@ export default function ItemDetails() {
             alert(error.message);
         }
     }
-
-    const isOwner = false;
-    const isAdmin = false;
-    const isLoggedIn = true;
-
-    const canManage = true;
-    const canLike = isLoggedIn && !canManage;
-
-    console.log("Item:", item);
-    console.log("Images:", item.images);
-    console.log("First image:", item.images?.[0]);
 
     return (
 
@@ -114,7 +105,7 @@ export default function ItemDetails() {
                             </div>
 
                             <div className={styles["item-details-actions"]}>
-                                {canManage && (
+                                {isOwner && (
                                     <>
                                         <Link to={`/items/${itemId}/edit`} className={styles["details-btn"] + " " + styles["edit-btn"]}>
                                             Edit
@@ -128,7 +119,7 @@ export default function ItemDetails() {
                                     </>
                                 )}
 
-                                {canLike && (
+                                {!isOwner && (
                                     <button className={styles["details-btn"] + " " + styles["like-btn"]}>
                                         ♡ &nbsp; 14 Likes
                                     </button>
