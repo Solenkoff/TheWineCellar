@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react";
-import CommentCard from "./comment-card/CommentCard";
+import { useContext, useEffect, useState } from "react";
+import CommentCard from "../comment-card/CommentCard";
 
 import styles from "./CommentList.module.css";
-import request from "../../utils/request";
+import AuthContext from "../../../contexts/auth-context";
+import { commentApi } from "../../../api";
 
 export default function CommentList({
     itemId,
@@ -12,7 +13,7 @@ export default function CommentList({
     const [isAdding, setIsAdding] = useState(false);
 
     useEffect(() => {
-        request(`/comments?item_id=eq.${itemId}&order=created_at.desc`)
+        commentApi.getAll(itemId)
             .then(result => {
                 setComments(result);
             })
