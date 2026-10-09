@@ -2,19 +2,19 @@ import { useContext, useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router";
 
 import request from "../../utils/request";
-import CommentList from "../comment-list/CommentList";
+import CommentList from "../comments/comment-list/CommentList";
 
 import styles from "./ItemDetails.module.css";
 import AuthContext from "../../contexts/auth-context";
 import { itemApi } from "../../api";
 
 export default function ItemDetails() {
-    const {user, accessToken} = useContext(AuthContext);
+    const { user, accessToken, isAuthenticated } = useContext(AuthContext);
     const { itemId } = useParams();
     const navigate = useNavigate();
     const [item, setItem] = useState({});
 
-    const isOwner = user && user?.id === item?.owner_id; 
+    const isOwner = user && user?.id === item?.owner_id;
 
     useEffect(() => {
         request(`/items?id=eq.${itemId}`)
@@ -39,7 +39,7 @@ export default function ItemDetails() {
         try {
             await itemApi.remove(itemId, accessToken);
 
-            navigate('/catalog'); 
+            navigate('/catalog');
         } catch (error) {
             alert(error.message);
         }
@@ -95,12 +95,12 @@ export default function ItemDetails() {
                             <div className={styles["item-info-row"]}>
                                 <strong>Listed by:</strong>
                                 <span>Pesho</span>
-                            </div> 
+                            </div>
 
                             <div className={styles["item-info-row"]}>
                                 <strong>Status:</strong>
                                 <span className={styles["text-capitalize"]}>
-                                    {item.status}  
+                                    {item.status}
                                 </span>
                             </div>
 
@@ -126,10 +126,12 @@ export default function ItemDetails() {
                                 )}
                             </div>
 
-                            <CommentList
-                                itemId={itemId}
-                                user={user}
-                            />
+                            {isAuthenticated &&
+                                <CommentList
+                                    itemId={itemId}
+                                    user={user}
+                                />
+                            }
                         </div>
 
                     </div>

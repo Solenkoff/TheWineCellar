@@ -7,10 +7,10 @@ import { commentApi } from "../../../api";
 
 export default function CommentList({
     itemId,
-    user,
 }) {
     const [comments, setComments] = useState([]);
     const [isAdding, setIsAdding] = useState(false);
+    const { user, accessToken } = useContext(AuthContext);
 
     useEffect(() => {
         commentApi.getAll(itemId)
@@ -31,14 +31,13 @@ export default function CommentList({
             return;
         }
 
-        const newComment = {
-            text: text,
-            author: user.email,
-            item_id: itemId,
-        }
-
         try {
-            const result = await request('/comments', 'POST', newComment);
+            const result = await commentApi.create(
+                itemId,
+                text,
+                user.user_metadata?.username || "Fellow Rescuer",
+                accessToken
+            )
 
             setComments(state => [result[0], ...state]);
             setIsAdding(false);
