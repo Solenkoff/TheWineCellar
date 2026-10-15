@@ -1,12 +1,12 @@
 import { Link, useNavigate } from "react-router";
-
+import useAuth from "../../hooks/useAuth";
 import styles from "./Register.module.css";
 
-export default function Register({
-    onRegister,
-}) {
+export default function Register() {
+    const { register } = useAuth();
+
     const navigate = useNavigate();
- 
+
     const registerAction = (formData) => {
 
         const username = formData.get("username");
@@ -24,7 +24,7 @@ export default function Register({
             return;
         }
 
-        onRegister({ username, email, password });
+        register({ username, email, password });
     };
 
     const cancelHandler = () => {

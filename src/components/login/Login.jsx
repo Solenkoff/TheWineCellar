@@ -1,9 +1,10 @@
 import { Link, useNavigate } from 'react-router';
+import useAuth from '../../hooks/useAuth';
 import styles from './Login.module.css'
 
-export default function Login({
-    onLogin,
-}) {
+export default function Login() {
+    const { login } = useAuth();
+
     const navigate = useNavigate();
 
     const submitAction = (formData) => {
@@ -14,7 +15,7 @@ export default function Login({
             return;
         }
 
-        onLogin({ email, password });
+        login({ email, password });
 
     }
 

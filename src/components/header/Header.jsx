@@ -1,10 +1,10 @@
 import { Link } from "react-router";
+import useAuth from "../../hooks/useAuth";
 
-export default function Header({
-    isAuthenticated,
-}) {
+export default function Header() {
+    const { isAuthenticated } = useAuth();
+
     return (
-
         <header>
             <nav
                 className="custom-navbar navbar navbar navbar-expand-md navbar-dark bg-dark"
