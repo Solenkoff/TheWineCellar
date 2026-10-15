@@ -16,11 +16,12 @@ import ItemEdit from "./components/item-edit/ItemEdit"
 import ScrollToTop from "./components/ui/scroll-to-top/ScrollToTop"
 import BackToTop from "./components/ui/back-to-top/BackToTop"
 import AuthContext from "./contexts/auth-context"
+import usePersistedState from "./hooks/usePersistedState"
 
 
 function App() {
     const navigate = useNavigate();
-    const [auth, setAuth] = useState(null);
+    const [auth, setAuth] = usePersistedState('auth', null);
 
     const registerAction = async (userData) => {
         try {
