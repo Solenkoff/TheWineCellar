@@ -20,52 +20,6 @@ import usePersistedState from "./hooks/usePersistedState"
 
 
 function App() {
-    const navigate = useNavigate();
-    const [auth, setAuth] = usePersistedState('auth', null);
-
-    const registerAction = async (userData) => {
-        try {
-            const result = await authApi.register(userData);
-
-            setAuth(result);
-
-            navigate('/');
-        } catch (error) {
-            alert(error.message);
-        }
-    };
-
-    const loginAction = async (userData) => {
-        try {
-            const result = await authApi.login(userData);
-
-            setAuth(result);
-
-            navigate('/');
-        } catch (error) {
-            alert(error.message);
-        }
-    };
-
-    const logoutAction = async () => {
-        try {
-            await authApi.logout(auth?.access_token);
-            
-            setAuth(null);
-        } catch (error) {
-            alert(error.message);
-        }
-    };
-
-    const contextValue = {
-        accessToken: auth?.access_token,
-        user: auth?.user,
-        isAuthenticated: !!auth,
-        registerAction,
-        loginAction,
-        logoutAction,
-    }
-
     return (
         <AuthContext.Provider value={ contextValue }>
 
