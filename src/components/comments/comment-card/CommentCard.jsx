@@ -1,6 +1,5 @@
 import styles from "./CommentCard.module.css";
 
-
 export default function CommentCard({
     comment,
 }) {

@@ -6,6 +6,7 @@ import { commentApi } from "../../../api";
 
 import styles from "./CommentList.module.css";
 import CommentCard from "../comment-card/CommentCard";
+import CommentCreate from "../comment-create/CommentCreate";
 
 export default function CommentList({
     itemId,
@@ -17,35 +18,22 @@ export default function CommentList({
     useEffect(() => {
         commentApi.getAll(itemId)
             .then(result => {
-                dispatch({type: 'SET_COMMENTS', payload: result});
+                dispatch({ type: 'SET_COMMENTS', payload: result });
             })
             .catch(error => {
                 alert(error.message);
             });
     }, [itemId]);
 
+    const commentAddedHandler = (comment) => {
+        dispatch({
+            type: 'ADD_COMMENT',
+            payload: comment,
+        });
 
-    const addCommentAction = async (formData) => {
-        const text = formData.get('text')?.trim();
-
-        if (!text) {
-            alert('Please enter a comment.');
-            return;
-        }
-
-        try {
-            const result = await commentApi.create(
-                itemId,
-                text,
-                user.user_metadata?.username || "Fellow Rescuer",
-            )
-
-            dispatch(state => [result[0], ...state]);
-            setIsAdding(false);
-        } catch (error) {
-            alert(error.message);
-        }
+        setIsAdding(false);
     };
+
 
     return (
         <section className={styles["comments-section"]}>
@@ -86,28 +74,12 @@ export default function CommentList({
                                 Add Comment
                             </button>
                         ) : (
-                            <form
-                                className={styles["comment-form"]}
-                                action={addCommentAction}
-                            >
-                                <h4>Your comment below</h4>
-
-                                <textarea
-                                    name="text"
-                                    placeholder="Comment..."
-                                    required
-                                />
-
-                                <div className={styles["comment-form-actions"]}>
-                                    <button type="button" onClick={() => setIsAdding(false)}>
-                                        Cancel
-                                    </button>
-
-                                    <button type="submit">
-                                        Add
-                                    </button>
-                                </div>
-                            </form>
+                            <CommentCreate
+                                itemId={itemId}
+                                user={user}
+                                onCommentAdded={commentAddedHandler}
+                                onCancel={() => setIsAdding(false)}
+                            />
                         )}
                     </div>
                 )}
