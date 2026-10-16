@@ -24,7 +24,7 @@ export default function ItemDetails() {
             })
             .catch(err => alert(err));
     }, [itemId]);
-
+ 
     const deleteItemClickHandler = async (e) => {
         e.preventDefault();
 

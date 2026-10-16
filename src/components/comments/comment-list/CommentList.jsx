@@ -1,21 +1,23 @@
-import { useContext, useEffect, useState } from "react";
-import CommentCard from "../comment-card/CommentCard";
+import { useContext, useEffect, useReducer, useState } from "react";
+
+import AuthContext from "../../../contexts/auth-context";
+import { commentReducer } from "../comment-reducer";
+import { commentApi } from "../../../api";
 
 import styles from "./CommentList.module.css";
-import AuthContext from "../../../contexts/auth-context";
-import { commentApi } from "../../../api";
+import CommentCard from "../comment-card/CommentCard";
 
 export default function CommentList({
     itemId,
 }) {
-    const [comments, setComments] = useState([]);
+    const [comments, dispatch] = useReducer(commentReducer, []);
     const [isAdding, setIsAdding] = useState(false);
     const { user, accessToken } = useContext(AuthContext);
 
     useEffect(() => {
         commentApi.getAll(itemId)
             .then(result => {
-                setComments(result);
+                dispatch({type: 'SET_COMMENTS', payload: result});
             })
             .catch(error => {
                 alert(error.message);
@@ -39,7 +41,7 @@ export default function CommentList({
                 accessToken
             )
 
-            setComments(state => [result[0], ...state]);
+            dispatch(state => [result[0], ...state]);
             setIsAdding(false);
         } catch (error) {
             alert(error.message);
