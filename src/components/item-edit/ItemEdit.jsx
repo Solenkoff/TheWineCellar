@@ -1,9 +1,8 @@
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router';
 
 import styles from './ItemEdit.module.css';
 import request from '../../utils/request';
-import AuthContext from '../../contexts/auth-context';
 import { itemApi } from '../../api';
 
 const initialValues = {
@@ -15,7 +14,6 @@ const initialValues = {
 }
 
 export default function ItemEdit() {
-    const { accessToken } = useContext(AuthContext);
     const navigate = useNavigate();
     const { itemId } = useParams();
     const [item, setItem] = useState(initialValues);
@@ -37,7 +35,7 @@ export default function ItemEdit() {
     const editAction = async () => {
 
         try {
-            await itemApi.update(itemId, item, accessToken);
+            await itemApi.update(itemId, item);
 
             navigate(`/items/${itemId}`);
         } catch (error) {

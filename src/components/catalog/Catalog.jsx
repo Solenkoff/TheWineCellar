@@ -1,17 +1,15 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import ItemCard from "../item-card/ItemCard";
 import { itemApi } from "../../api";
-import AuthContext from "../../contexts/auth-context";
 
 export default function Catalog() {
-    const { accessToken } = useContext(AuthContext);
     const [items, setItems] = useState([]);
 
     useEffect(() => {
-        itemApi.getAll(accessToken)
+        itemApi.getAll()
             .then(setItems)
             .catch(err => alert(err));
-    }, [accessToken]);
+    }, []);
 
     return (
 

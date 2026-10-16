@@ -12,7 +12,7 @@ export default function CommentList({
 }) {
     const [comments, dispatch] = useReducer(commentReducer, []);
     const [isAdding, setIsAdding] = useState(false);
-    const { user, accessToken } = useContext(AuthContext);
+    const { user } = useContext(AuthContext);
 
     useEffect(() => {
         commentApi.getAll(itemId)
@@ -38,7 +38,6 @@ export default function CommentList({
                 itemId,
                 text,
                 user.user_metadata?.username || "Fellow Rescuer",
-                accessToken
             )
 
             dispatch(state => [result[0], ...state]);

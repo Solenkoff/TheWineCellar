@@ -9,7 +9,7 @@ import AuthContext from "../../contexts/auth-context";
 import { itemApi } from "../../api";
 
 export default function ItemDetails() {
-    const { user, accessToken, isAuthenticated } = useContext(AuthContext);
+    const { user, isAuthenticated } = useContext(AuthContext);
     const { itemId } = useParams();
     const navigate = useNavigate();
     const [item, setItem] = useState({});
@@ -34,10 +34,8 @@ export default function ItemDetails() {
             return;
         }
 
-        console.log('Access token exists:', !!accessToken);
-
         try {
-            await itemApi.remove(itemId, accessToken);
+            await itemApi.remove(itemId);
 
             navigate('/catalog');
         } catch (error) {
