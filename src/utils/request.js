@@ -11,6 +11,7 @@ async function baseRequest(url, path = '/', method = 'GET', data = null, opts = 
             ...opts.headers,
             apiKey,
             Prefer: "return=representation",
+            ...getAuthHeader(),
         },
     };
 
@@ -42,4 +43,14 @@ export default async function request(path = '/', method = 'GET', data = null, o
 
 export const authRequest = async (path = '/', method = 'GET', data = null, opts = {}) => {
     return baseRequest(authUrl, path , method, data, opts);
+}
+
+
+function getAuthHeader() {
+    const auth = localStorage.getItem('auth');
+    const accessToken = auth ? JSON.parse(auth).access_token : null;
+
+    return {
+        ...(accessToken ? { Authorization: `Bearer ${accessToken}` } : {})
+    }
 }
