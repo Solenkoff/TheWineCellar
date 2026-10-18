@@ -23,8 +23,6 @@
     line-height: 1.2;
 }
 
- /* ======================== */
-
  .comment-header {
     display: flex;
     justify-content: space-between;
@@ -65,4 +63,86 @@
 
 .comment-action-btn.edit-btn {
     transform: scaleX(-1);
+}
+
+.comment-edit-form {
+    width: 100%;
+
+    textarea {
+        width: 100% !important;
+        border-radius: 4px;
+    }
+}
+
+.comment-edit-form {
+    width: 100%;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-top: 8px;
+    margin-bottom: 4px;
+}
+
+.comment-edit-form textarea {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+    min-height: 68px;
+    padding: 8px 8px;
+    font: inherit;
+    font-size: 14px;
+    line-height: 1.6;
+    color: #2f3e35;
+    background-color: #f8faf7;
+    border: 1px solid #cbd8ce;
+    border-radius: 8px;
+    resize: vertical;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.comment-edit-form textarea:focus {
+    border-color: #3b5d50;
+    box-shadow: 0 0 0 3px rgba(59, 93, 80, 0.12);
+}
+
+.comment-form-actions {
+    display: flex;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: 2px;
+}
+
+.comment-form-actions button {
+    padding: 2px 13px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.2s;
+}
+
+.comment-form-actions button[type="submit"],
+.comment-form-actions button[type="button"]  {
+    background: #3b5d50;
+    color: white;
+    border: 1px solid #3b5d50;
+}
+
+.comment-form-actions button[type="submit"]:hover:not(:disabled),
+.comment-form-actions button[type="button"]:hover {
+    background: #29483d;
+}
+
+.comment-form-actions button:focus-visible {
+    outline: 2px solid #3b5d50;
+    outline-offset: 2px;
+}
+
+.comment-form-actions button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
 }
