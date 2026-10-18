@@ -1,11 +1,38 @@
+import { useState } from "react";
 import styles from "./CommentCard.module.css";
 
 export default function CommentCard({
     comment,
     user,
     onDelete,
+    onEdit,
 }) {
+    const [isEditing, setIsEditing] = useState(false);
+    const [editedText, setEditedText] = useState(comment.text);
+    const [isSaving, setIsSaving] = useState(false);
+
     const isAuthor = !!user && user.id === comment.author_id;
+
+    const cancelEditHandler = () => {
+        setEditedText(comment.text);
+        setIsEditing(false);
+    };
+
+    const editCommentAction = async (formData) => {
+        const text = formData.get("text")?.trim();
+
+        if (!text) return;
+
+        try {
+            setIsSaving(true);
+            await onEdit(comment.id, text);
+            setIsEditing(false);
+        } catch (error) {
+            alert(error.message);
+        } finally {
+            setIsSaving(false);
+        }
+    };
 
     return (
         <div className={styles["comment-card"]}>
@@ -21,6 +48,7 @@ export default function CommentCard({
                             className={`${styles["comment-action-btn"]} ${styles["edit-btn"]}`}
                             title="Edit comment"
                             aria-label="Edit comment"
+                            onClick={() => setIsEditing(true)}
                         >
                             ✎
                         </button>
@@ -38,9 +66,35 @@ export default function CommentCard({
                 )}
             </div>
 
-            <p className={styles["comment-text"]}>
-                {comment.text}
-            </p>
+            {isEditing ? (
+                <form action={editCommentAction}>
+                    <textarea
+                        name="text"
+                        defaultValue={editedText}
+                        required
+                        autoFocus
+                        disabled={isSaving}
+                    />
+
+                    <div className={styles["comment-form-actions"]}>
+                        <button
+                            type="button"
+                            onClick={cancelEditHandler}
+                            disabled={isSaving}
+                        >
+                            Cancel
+                        </button>
+
+                        <button type="submit" disabled={isSaving}>
+                            {isSaving ? "Saving..." : "Save"}
+                        </button>
+                    </div>
+                </form>
+            ) : (
+                <p className={styles["comment-text"]}>
+                    {comment.text}
+                </p>
+            )}
 
             <span className={styles["comment-date"]}>
                 {comment.updated_at

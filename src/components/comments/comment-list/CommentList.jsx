@@ -34,6 +34,19 @@ export default function CommentList({
         setIsAdding(false);
     };
 
+    const editCommentHandler = async (commentId, text) => {
+        const result = await commentApi.update(commentId, text);
+
+        if (!result?.length) {
+            throw new Error("Comment could not be updated.");
+        }
+
+        dispatch({
+            type: 'UPDATE_COMMENT',
+            payload: result[0],
+        });
+    };
+
     const deleteCommentHandler = async (commentId) => {
         const confirmed = window.confirm("Are you sure you want to delete this comment?");
 
@@ -70,6 +83,7 @@ export default function CommentList({
                                 comment={comment}
                                 user={user}
                                 onDelete={deleteCommentHandler}
+                                onEdit={editCommentHandler}
                             />
                         ))}
                     </div>
