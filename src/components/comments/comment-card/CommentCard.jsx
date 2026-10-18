@@ -8,13 +8,11 @@ export default function CommentCard({
     onEdit,
 }) {
     const [isEditing, setIsEditing] = useState(false);
-    const [editedText, setEditedText] = useState(comment.text);
     const [isSaving, setIsSaving] = useState(false);
 
     const isAuthor = !!user && user.id === comment.author_id;
 
     const cancelEditHandler = () => {
-        setEditedText(comment.text);
         setIsEditing(false);
     };
 
@@ -70,7 +68,7 @@ export default function CommentCard({
                 <form action={editCommentAction}>
                     <textarea
                         name="text"
-                        defaultValue={editedText}
+                        defaultValue={comment.text}
                         required
                         autoFocus
                         disabled={isSaving}
