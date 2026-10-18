@@ -34,6 +34,23 @@ export default function CommentList({
         setIsAdding(false);
     };
 
+    const deleteCommentHandler = async (commentId) => {
+        const confirmed = window.confirm("Are you sure you want to delete this comment?");
+
+        if (!confirmed) return;
+
+        try {
+            await commentApi.remove(commentId);
+
+            dispatch({
+                type: 'DELETE_COMMENT',
+                payload: commentId,
+            });
+        } catch (error) {
+            alert(error.message);
+        }
+    };
+
 
     return (
         <section className={styles["comments-section"]}>
@@ -51,6 +68,8 @@ export default function CommentList({
                             <CommentCard
                                 key={comment.id}
                                 comment={comment}
+                                user={user}
+                                onDelete={deleteCommentHandler}
                             />
                         ))}
                     </div>

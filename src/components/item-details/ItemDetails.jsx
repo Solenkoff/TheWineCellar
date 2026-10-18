@@ -1,15 +1,15 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router";
 
 import request from "../../utils/request";
 import CommentList from "../comments/comment-list/CommentList";
 
 import styles from "./ItemDetails.module.css";
-import AuthContext from "../../contexts/auth-context";
 import { itemApi } from "../../api";
+import useAuth from "../../hooks/useAuth";
 
 export default function ItemDetails() {
-    const { user, isAuthenticated } = useContext(AuthContext);
+    const { user } = useAuth();
     const { itemId } = useParams();
     const navigate = useNavigate();
     const [item, setItem] = useState({});
@@ -24,7 +24,7 @@ export default function ItemDetails() {
             })
             .catch(err => alert(err));
     }, [itemId]);
- 
+
     const deleteItemClickHandler = async (e) => {
         e.preventDefault();
 
@@ -124,12 +124,11 @@ export default function ItemDetails() {
                                 )}
                             </div>
 
-                            {isAuthenticated &&
-                                <CommentList
-                                    itemId={itemId}
-                                    user={user}
-                                />
-                            }
+                            <CommentList
+                                itemId={itemId}
+                                user={user}
+                            />
+
                         </div>
 
                     </div>

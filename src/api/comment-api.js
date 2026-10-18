@@ -12,5 +12,7 @@ export const create = (itemId, text, author) => {
     });
 }
 
-
+export const remove = (commentId) => {
+    return request(`/comments?id=eq.${commentId}`, "DELETE");
+};
 
