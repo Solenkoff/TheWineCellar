@@ -15,6 +15,7 @@ import Logout from "./components/logout/Logout"
 import BackToTop from "./components/ui/back-to-top/BackToTop"
 import Footer from "./components/footer/Footer"
 import About from "./components/about/About"
+import Contact from "./components/contact/Contact"
 
 
 function App() {
@@ -35,6 +36,7 @@ function App() {
                 <Route path="/login" element={<Login />} />
                 <Route path="/logout" element={<Logout />} />
                 <Route path="/about" element={<About />} />
+                <Route path="/contact" element={<Contact />} />
             </Routes>
 
             <BackToTop />
