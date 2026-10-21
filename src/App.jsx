@@ -14,6 +14,7 @@ import Login from "./components/login/Login"
 import Logout from "./components/logout/Logout"
 import BackToTop from "./components/ui/back-to-top/BackToTop"
 import Footer from "./components/footer/Footer"
+import About from "./components/about/About"
 
 
 function App() {
@@ -33,6 +34,7 @@ function App() {
                 <Route path="/register" element={<Register />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/logout" element={<Logout />} />
+                <Route path="/about" element={<About />} />
             </Routes>
 
             <BackToTop />
