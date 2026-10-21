@@ -1,5 +1,6 @@
 import { useState } from "react";
 import styles from "./CommentCard.module.css";
+import formatDate from "../../../utils/formatDate";
 
 export default function CommentCard({
     comment,
@@ -65,7 +66,7 @@ export default function CommentCard({
             </div>
 
             {isEditing ? (
-                <form action={editCommentAction}>
+                <form action={editCommentAction} className={styles["comment-edit-form"]}>
                     <textarea
                         name="text"
                         defaultValue={comment.text}
@@ -96,8 +97,8 @@ export default function CommentCard({
 
             <span className={styles["comment-date"]}>
                 {comment.updated_at
-                    ? `Edited: ${comment.updated_at}`
-                    : comment.created_at}
+                    ? `Edited: ${formatDate(comment.updated_at)}`
+                    : formatDate(comment.created_at)}
             </span>
 
         </div>
