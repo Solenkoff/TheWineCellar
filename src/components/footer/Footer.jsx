@@ -89,9 +89,6 @@ export default function Footer() {
                                     <li>
                                         <a href="#">Services</a>
                                     </li>
-                                    <li>
-                                        <a href="#">Blog</a>
-                                    </li>
                                 </ul>
                             </div>
                             <div className="col-6 col-sm-6 col-md-3">
@@ -105,9 +102,6 @@ export default function Footer() {
                                     <li>
                                         <a href="#">Leadership</a>
                                     </li>
-                                    <li>
-                                        <a href="#">Jobs</a>
-                                    </li>
                                 </ul>
                             </div>
                             <div className="col-6 col-sm-6 col-md-3">
@@ -119,9 +113,6 @@ export default function Footer() {
                                         <a href="#">Support</a>
                                     </li>
                                     <li>
-                                        <a href="#">Live chat</a>
-                                    </li>
-                                    <li>
                                         <a href="#">FAQ</a>
                                     </li>
                                 </ul>
@@ -129,13 +120,10 @@ export default function Footer() {
                             <div className="col-6 col-sm-6 col-md-3">
                                 <ul className="list-unstyled">
                                     <li>
-                                        <a href="#">Sustainability</a>
+                                        <a href="https://www.taysidereusers.co.uk/the-environmental-impact-of-reusing-furniture-numbers-that-will-surprise-you/">Sustainability</a>
                                     </li>
                                     <li>
-                                        <a href="#">Partners</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Feng shui</a>
+                                        <a href="https://www.thespruce.com/what-is-feng-shui-1275060">Feng shui</a>
                                     </li>
                                 </ul>
                             </div>

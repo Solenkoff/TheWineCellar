@@ -40,10 +40,7 @@ export default function Header() {
                                 <Link className="nav-link" to="#">Services</Link>
                             </li>
                             <li>
-                                <Link className="nav-link" to="#">Blog</Link>
-                            </li>
-                            <li>
-                                <Link className="nav-link" to="#">Contact us</Link>
+                                <Link className="nav-link" to="/contact">Contact us</Link>
                             </li>
                             {isAuthenticated &&
                                 <li>
