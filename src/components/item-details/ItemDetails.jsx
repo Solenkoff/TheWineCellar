@@ -58,13 +58,6 @@ export default function ItemDetails() {
                                 className={styles["item-details-image"]}
                             />
 
-                            <div className={styles["image-dots"]}>
-                                <span className={styles["active"]}></span>
-                                <span className={styles["image-dot"]}></span>
-                                <span className={styles["image-dot"]}></span>
-                                <span></span>
-                            </div>
-
                             <h2 className={styles["item-details-price"]}>
                                 € {item.price}
                             </h2>

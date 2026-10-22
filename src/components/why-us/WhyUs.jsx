@@ -1,6 +1,6 @@
 export default function WhyUs() {
     return (
-        <div className="why-choose-section">
+        <div  className="why-choose-section">
             <div className="container">
                 <div className="row justify-content-between">
                     <div className="col-lg-6">
@@ -39,7 +39,7 @@ export default function WhyUs() {
                                     </p>
                                 </div>
                             </div>
-                            <div className="col-6 col-md-6">
+                            <div id="why-choose-us" className="col-6 col-md-6">
                                 <div className="feature">
                                     <div className="icon">
                                         <img
