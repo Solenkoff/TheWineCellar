@@ -8,7 +8,7 @@ export default function Footer() {
                 <div className="sofa-img">
                     <img src="/images/sofa.png" alt="Image" className="img-fluid" />
                 </div>
-                <div className="row">
+                {/* <div className="row">
                     <div className="col-lg-8">
                         <div className="subscription-form">
                             <h3 className="d-flex align-items-center">
@@ -44,11 +44,11 @@ export default function Footer() {
                             </form>
                         </div>
                     </div>
-                </div>
+                </div> */}
                 <div className="row g-5 mb-5">
                     <div className="col-lg-4">
                         <div className="mb-4 footer-logo-wrap">
-                            <a href="#" className="footer-logo">
+                            <a href="/" className="footer-logo">
                                 Furni<span>Shelter</span>
                             </a>
                         </div>
@@ -101,13 +101,6 @@ export default function Footer() {
                                     <li>
                                         <Link to="/about#team">Our team</Link>
                                     </li>
-                                </ul>
-                            </div>
-                            <div className="col-6 col-sm-6 col-md-3">
-                                <ul className="list-unstyled">
-                                    <li>
-                                        <Link to="/contact">Contact us</Link>
-                                    </li>
                                     <li>
                                         <Link to="/contact">Support</Link>
                                     </li>
@@ -116,11 +109,20 @@ export default function Footer() {
                             <div className="col-6 col-sm-6 col-md-3">
                                 <ul className="list-unstyled">
                                     <li>
+                                        <Link to="/contact">Contact us</Link>
+                                    </li>
+                                     <li>
                                         <Link to="https://www.taysidereusers.co.uk/the-environmental-impact-of-reusing-furniture-numbers-that-will-surprise-you/">Sustainability</Link>
                                     </li>
                                     <li>
                                         <Link to="https://www.thespruce.com/what-is-feng-shui-1275060">Feng shui</Link>
                                     </li>
+                                    
+                                </ul>
+                            </div>
+                            <div className="col-6 col-sm-6 col-md-3">
+                                <ul className="list-unstyled">
+                                   
                                 </ul>
                             </div>
                         </div>
