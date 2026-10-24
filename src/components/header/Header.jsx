@@ -1,8 +1,9 @@
-import { Link } from "react-router";
+import { Link, useLocation } from "react-router";
 import useAuth from "../../hooks/useAuth";
 
 export default function Header() {
     const { isAuthenticated } = useAuth();
+    const { pathname } = useLocation();
 
     return (
         <header>
@@ -27,23 +28,20 @@ export default function Header() {
                     </button>
                     <div className="collapse navbar-collapse" id="navbarsFurni">
                         <ul className="custom-navbar-nav navbar-nav ms-auto mb-2 mb-md-0">
-                            <li className="nav-item active">
+                            <li className={pathname === "/" ? "active" : ""}>
                                 <Link className="nav-link" to="/">Home</Link>
                             </li>
-                            <li>
+                            <li className={pathname.startsWith("/catalog") ? "active" : ""}>
                                 <Link className="nav-link" to="/catalog">Catalog</Link>
                             </li>
-                            <li>
+                            <li className={pathname.startsWith("/about") ? "active" : ""}>
                                 <Link className="nav-link" to="/about">About us</Link>
                             </li>
-                            <li>
-                                <Link className="nav-link" to="#">Services</Link>
-                            </li>
-                            <li>
+                            <li className={pathname.startsWith("/contact") ? "active" : ""}>
                                 <Link className="nav-link" to="/contact">Contact us</Link>
                             </li>
                             {isAuthenticated &&
-                                <li>
+                                <li className={pathname.startsWith("/items/add") ? "active" : ""}>
                                     <Link className="nav-link" to="/items/add">AddListing</Link>
                                 </li>
                             }
