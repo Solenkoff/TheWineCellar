@@ -1,3 +1,5 @@
+import { Link } from "react-router";
+
 export default function Footer() {
     return (
 
@@ -19,7 +21,7 @@ export default function Footer() {
                                 </span>
                                 <span>Subscribe to Newsletter</span>
                             </h3>
-                            <form action="#" className="row g-3">
+                            <form action="/contact" className="row g-3">
                                 <div className="col-auto">
                                     <input
                                         type="text"
@@ -81,49 +83,43 @@ export default function Footer() {
                             <div className="col-6 col-sm-6 col-md-3">
                                 <ul className="list-unstyled">
                                     <li>
-                                        <a href="#">Home</a>
+                                        <Link to="/">Home</Link>
                                     </li>
                                     <li>
-                                        <a href="#">Catalog</a>
+                                        <Link to="/catalog">Catalog</Link>
                                     </li>
                                     <li>
-                                        <a href="#">Services</a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div className="col-6 col-sm-6 col-md-3">
-                                <ul className="list-unstyled">
-                                    <li>
-                                        <a href="#">About us</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Our team</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Leadership</a>
+                                        <Link to="/about#why-choose-us">Services</Link>
                                     </li>
                                 </ul>
                             </div>
                             <div className="col-6 col-sm-6 col-md-3">
                                 <ul className="list-unstyled">
                                     <li>
-                                        <a href="#">Contact us</a>
+                                        <Link to="/about">About us</Link>
                                     </li>
                                     <li>
-                                        <a href="#">Support</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">FAQ</a>
+                                        <Link to="/about#team">Our team</Link>
                                     </li>
                                 </ul>
                             </div>
                             <div className="col-6 col-sm-6 col-md-3">
                                 <ul className="list-unstyled">
                                     <li>
-                                        <a href="https://www.taysidereusers.co.uk/the-environmental-impact-of-reusing-furniture-numbers-that-will-surprise-you/">Sustainability</a>
+                                        <Link to="/contact">Contact us</Link>
                                     </li>
                                     <li>
-                                        <a href="https://www.thespruce.com/what-is-feng-shui-1275060">Feng shui</a>
+                                        <Link to="/contact">Support</Link>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div className="col-6 col-sm-6 col-md-3">
+                                <ul className="list-unstyled">
+                                    <li>
+                                        <Link to="https://www.taysidereusers.co.uk/the-environmental-impact-of-reusing-furniture-numbers-that-will-surprise-you/">Sustainability</Link>
+                                    </li>
+                                    <li>
+                                        <Link to="https://www.thespruce.com/what-is-feng-shui-1275060">Feng shui</Link>
                                     </li>
                                 </ul>
                             </div>
