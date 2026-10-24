@@ -1,26 +1,25 @@
 import Testimonials from "../testimonials/Testimonials";
 import WhyUs from "../why-us/WhyUs";
+import styles from "./About.module.css"
+
 
 export default function About() {
     return (<>
         {/* Start Hero Section */}
-        <div className="hero">
+        <div className={`hero ${styles.hero}`}>
             <div className="container">
                 <div className="row justify-content-between">
                     <div className="col-lg-5">
                         <div className="intro-excerpt">
-                            <h1>About Us</h1>
+                            <h1>Who We Are</h1>
                             <p className="mb-4">
-                                Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet
-                                velit. Aliquam vulputate velit imperdiet dolor tempor tristique.
+                                At FurniShelter, we believe every piece of furniture has a story worth continuing.
                             </p>
                             <p>
-                                <a href="" className="btn btn-secondary me-2">
-                                    Shop Now
-                                </a>
-                                <a href="#" className="btn btn-white-outline">
-                                    Explore
-                                </a>
+                                We're a community-driven platform connecting people who have furniture to pass on with those looking for unique, affordable pieces to bring into their homes. Whether you're making room for something new or searching for a hidden gem, we make it easier to give pre-loved furniture a fresh start.
+                            </p>
+                            <p>
+                                Our mission is simple: reduce waste, encourage reuse, and make sustainable living accessible to everyone. Because sometimes, the perfect piece isn't brand new — it's just waiting for its next chapter.
                             </p>
                         </div>
                     </div>
@@ -36,7 +35,7 @@ export default function About() {
 
 
         <WhyUs />
-        
+
         {/* Start Team Section */}
         <div className="untree_co-section">
             <div className="container">
@@ -54,15 +53,9 @@ export default function About() {
                                 <span className="">Lawson</span> Arnold
                             </a>
                         </h3>
-                        <span className="d-block position mb-4">CEO, Founder, Atty.</span>
+                        <span className="d-block position mb-4">Founder & Sustainability Advocate</span>
                         <p>
-                            Separated they live in. Separated they live in Bookmarksgrove right
-                            at the coast of the Semantics, a large language ocean.
-                        </p>
-                        <p className="mb-0">
-                            <a href="#" className="more dark">
-                                Learn More <span className="icon-arrow_forward" />
-                            </a>
+                            Passionate about reducing furniture waste, Lawson started Second Life Furniture to help beautiful pieces find new homes and inspire more sustainable living.
                         </p>
                     </div>
                     {/* End Column 1 */}
@@ -74,15 +67,9 @@ export default function About() {
                                 <span className="">Jeremy</span> Walker
                             </a>
                         </h3>
-                        <span className="d-block position mb-4">CEO, Founder, Atty.</span>
+                        <span className="d-block position mb-4">Community & Customer Support</span>
                         <p>
-                            Separated they live in. Separated they live in Bookmarksgrove right
-                            at the coast of the Semantics, a large language ocean.
-                        </p>
-                        <p className="mb-0">
-                            <a href="#" className="more dark">
-                                Learn More <span className="icon-arrow_forward" />
-                            </a>
+                            Jeremy helps connect furniture owners with their next rescuers, making every interaction friendly, simple, and enjoyable.
                         </p>
                     </div>
                     {/* End Column 2 */}
@@ -94,15 +81,9 @@ export default function About() {
                                 <span className="">Patrik</span> White
                             </a>
                         </h3>
-                        <span className="d-block position mb-4">CEO, Founder, Atty.</span>
+                        <span className="d-block position mb-4">Furniture Restoration Specialist</span>
                         <p>
-                            Separated they live in. Separated they live in Bookmarksgrove right
-                            at the coast of the Semantics, a large language ocean.
-                        </p>
-                        <p className="mb-0">
-                            <a href="#" className="more dark">
-                                Learn More <span className="icon-arrow_forward" />
-                            </a>
+                            With an eye for hidden potential, Patrik believes even the most forgotten furniture can shine again with a little care and creativity.
                         </p>
                     </div>
                     {/* End Column 3 */}
@@ -114,15 +95,9 @@ export default function About() {
                                 <span className="">Kathryn</span> Ryan
                             </a>
                         </h3>
-                        <span className="d-block position mb-4">CEO, Founder, Atty.</span>
+                        <span className="d-block position mb-4">Partnerships & Logistics Coordinator</span>
                         <p>
-                            Separated they live in. Separated they live in Bookmarksgrove right
-                            at the coast of the Semantics, a large language ocean.
-                        </p>
-                        <p className="mb-0">
-                            <a href="#" className="more dark">
-                                Learn More <span className="icon-arrow_forward" />
-                            </a>
+                            Kathryn works with our transport and moving partners to help make every furniture rescue easier, safer, and more affordable.
                         </p>
                     </div>
                     {/* End Column 4 */}
@@ -132,7 +107,7 @@ export default function About() {
         {/* End Team Section */}
 
         <Testimonials />
-        
+
     </>
 
     );
