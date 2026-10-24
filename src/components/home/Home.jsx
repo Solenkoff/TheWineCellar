@@ -26,7 +26,6 @@ export default function Home() {
 
         <>
 
-            {/* Start Hero Section */}
             <div className="hero">
                 <div className="container">
                     <div className="row justify-content-between">
@@ -42,9 +41,6 @@ export default function Home() {
                                     <Link to="/catalog" className="btn btn-secondary me-2">
                                         Rescue Now
                                     </Link>
-                                    {/* <a href="#" className="btn btn-white-outline">
-                                        Explore
-                                    </a> */}
                                 </p>
                             </div>
                         </div>
@@ -56,15 +52,11 @@ export default function Home() {
                     </div>
                 </div>
             </div>
-            {/* End Hero Section */}
 
-            {/* Start Product Section */}
             <div className="product-section">
                 <div className="container">
                     <div className="row">
 
-
-                        {/* Start Column 1 */}
                         <div className="col-md-12 col-lg-3 mb-5 mb-lg-0">
                             <h2 className="mb-4 section-title">
                                 Freshly Listed, Ready to Rescue
@@ -78,17 +70,14 @@ export default function Home() {
                                 </Link>
                             </p>
                         </div>
-                        {/* End Column 1 */}
                         {latestItems.length > 0
                             ? latestItems.map(item => <ItemCard key={item.id} {...item} />)
                             : <h1>No Added Items Yet</h1>
                         }
 
-
                     </div>
                 </div>
             </div>
-            {/* End Product Section */}
 
             <WhyUs />
 

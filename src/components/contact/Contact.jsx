@@ -1,24 +1,20 @@
 export default function Contact() {
     return (
         <>
-            {/* Start Hero Section */}
             <div className="hero">
                 <div className="container">
                     <div className="row justify-content-between">
                         <div className="col-lg-5">
                             <div className="intro-excerpt">
-                                <h1>Contact</h1>
-                                <p className="mb-4">
-                                    Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet
-                                    velit. Aliquam vulputate velit imperdiet dolor tempor tristique.
+                                <h1>Contact Us</h1>
+                                <p className="mb-4 fs-5">
+                                    We'd love to hear from you!
                                 </p>
                                 <p>
-                                    <a href="" className="btn btn-secondary me-2">
-                                        Shop Now
-                                    </a>
-                                    <a href="#" className="btn btn-white-outline">
-                                        Explore
-                                    </a>
+                                    Have a question, an idea, or need a little help with your furniture rescue? Whether you're giving a piece a new home or searching for something special, we're here to help.
+                                </p>
+                                <p>
+                                    Drop us a message — we're always happy to connect!
                                 </p>
                             </div>
                         </div>
@@ -30,8 +26,7 @@ export default function Contact() {
                     </div>
                 </div>
             </div>
-            {/* End Hero Section */}
-            {/* Start Contact Form */}
+
             <div className="untree_co-section">
                 <div className="container">
                     <div className="block">
@@ -56,13 +51,10 @@ export default function Contact() {
                                                     <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z" />
                                                 </svg>
                                             </div>{" "}
-                                            {/* /.icon */}
                                             <div className="service-contents">
-                                                <p>43 Raymouth Rd. Baltemoer, London 3910</p>
+                                                <p>1 Knyaz Alexander I Sq.<br />1169 Sofia, Bulgaria</p>
                                             </div>{" "}
-                                            {/* /.service-contents*/}
                                         </div>{" "}
-                                        {/* /.service */}
                                     </div>
                                     <div className="col-lg-4">
                                         <div
@@ -82,13 +74,10 @@ export default function Contact() {
                                                     <path d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414.05 3.555zM0 4.697v7.104l5.803-3.558L0 4.697zM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586l-1.239-.757zm3.436-.586L16 11.801V4.697l-5.803 3.546z" />
                                                 </svg>
                                             </div>{" "}
-                                            {/* /.icon */}
                                             <div className="service-contents">
-                                                <p>info@yourdomain.com</p>
+                                                <p>parlament@circus.com</p>
                                             </div>{" "}
-                                            {/* /.service-contents*/}
                                         </div>{" "}
-                                        {/* /.service */}
                                     </div>
                                     <div className="col-lg-4">
                                         <div
@@ -111,13 +100,10 @@ export default function Contact() {
                                                     />
                                                 </svg>
                                             </div>{" "}
-                                            {/* /.icon */}
                                             <div className="service-contents">
-                                                <p>+1 294 3925 3939</p>
+                                                <p>+359 2 939 39</p>
                                             </div>{" "}
-                                            {/* /.service-contents*/}
                                         </div>{" "}
-                                        {/* /.service */}
                                     </div>
                                 </div>
                                 <form>
@@ -167,7 +153,6 @@ export default function Contact() {
                     </div>
                 </div>
             </div>
-            {/* End Contact Form */}
         </>
 
     );
