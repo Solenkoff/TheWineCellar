@@ -2,6 +2,7 @@ import { Route, Routes } from "react-router"
 
 import { AuthProvider } from "./contexts/auth-context"
 
+import ToastNotification from "./components/toast-notification/ToastNotification"
 import Header from "./components/header/Header"
 import ScrollToTop from "./components/ui/scroll-to-top/ScrollToTop"
 import Home from "./components/home/Home"
@@ -40,6 +41,8 @@ function App() {
             </Routes>
 
             <BackToTop />
+
+            <ToastNotification />
 
             <Footer />
 
