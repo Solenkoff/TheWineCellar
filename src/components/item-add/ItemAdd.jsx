@@ -1,5 +1,6 @@
-import { useState } from 'react';
-import { useNavigate, useParams } from 'react-router';
+import { useState } from "react";
+import { useNavigate } from "react-router";
+import { toast } from "react-toastify";
 
 import styles from './ItemAdd.module.css';
 import { itemApi } from '../../api';
@@ -14,6 +15,7 @@ const initialValues = {
 
 export default function ItemAdd() {
     const [values, setValues] = useState(initialValues);
+    const [isSubmitting, setIsSubmitting] = useState(false);
     const navigate = useNavigate();
 
     const changeHandler = (e) => {
@@ -26,17 +28,40 @@ export default function ItemAdd() {
     };
 
     const submitAction = async () => {
+        if (
+            !values.title.trim() ||
+            !values.category ||
+            values.price === "" ||
+            !values.description.trim() ||
+            !values.images[0]?.trim()
+        ) {
+            toast.error("Please fill in all required fields.");
+            return;
+        }
+
+        if (Number(values.price) < 0) {
+            toast.error("Price cannot be negative.");
+            return;
+        }
+
+        if (isSubmitting) return;
+
+        setIsSubmitting(true);
+
         try {
             await itemApi.addItem(values);
 
-            navigate('/');
+            toast.success("Your listing has been created successfully!");
+            navigate("/catalog");
         } catch (error) {
-            alert(error.message);
+            toast.error(error.message || "Failed to create listing. Please try again.");
+        } finally {
+            setIsSubmitting(false);
         }
     };
 
     const cancelHandler = () => {
-         navigate('/catalog');
+        navigate('/catalog');
     };
 
     return (
@@ -65,7 +90,7 @@ export default function ItemAdd() {
                         </button>
                     </div>
 
-                    <form action={submitAction}>
+                    <form action={submitAction} noValidate >
                         <div className={styles["form-fields"]}>
                             <div className={styles["form-group"]}>
                                 <label htmlFor="title">Listing title *</label>
@@ -162,8 +187,12 @@ export default function ItemAdd() {
                             >
                                 Cancel
                             </button>
-                            <button type="submit" className={styles["add-button"]}>
-                                Add Listing
+                            <button
+                                type="submit"
+                                className={styles["add-button"]}
+                                disabled={isSubmitting}
+                            >
+                                {isSubmitting ? "Adding..." : "Add Listing"}
                             </button>
                         </div>
                     </form>
