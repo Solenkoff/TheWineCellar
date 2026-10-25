@@ -1,6 +1,8 @@
 import { Link, useNavigate } from "react-router";
-import useAuth from "../../hooks/useAuth";
+import { toast } from "react-toastify";
+
 import styles from "./Register.module.css";
+import useAuth from "../../hooks/useAuth";
 
 export default function Register() {
     const { register } = useAuth();
@@ -8,19 +10,18 @@ export default function Register() {
     const navigate = useNavigate();
 
     const registerAction = (formData) => {
-
-        const username = formData.get("username");
-        const email = formData.get("email");
+        const username = formData.get("username")?.trim();
+        const email = formData.get("email")?.trim();
         const password = formData.get("password");
-        const confirmPassword = formData.get("confirm-password")
+        const confirmPassword = formData.get("confirm-password");
 
         if (!username || !email || !password || !confirmPassword) {
-            alert('All fields are required!');
+            toast.error("All fields are required!");
             return;
         }
 
         if (password !== confirmPassword) {
-            alert('Passwords do not match!');
+            toast.error("Passwords do not match!");
             return;
         }
 
@@ -52,7 +53,7 @@ export default function Register() {
                         </button>
                     </div>
 
-                    <form action={registerAction}>
+                    <form action={registerAction} noValidate >
                         <div className={styles["register-form-group"]}>
                             <label htmlFor="register-username">Username *</label>
                             <input type="text" id="register-username" name="username" placeholder="Choose a username" required />
