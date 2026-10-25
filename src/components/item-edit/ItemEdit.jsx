@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router';
+import { toast } from "react-toastify";
 
 import styles from './ItemEdit.module.css';
 import request from '../../utils/request';
@@ -17,11 +18,43 @@ export default function ItemEdit() {
     const navigate = useNavigate();
     const { itemId } = useParams();
     const [item, setItem] = useState(initialValues);
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
+
 
     useEffect(() => {
-        request(`/items?id=eq.${itemId}`)
-            .then(data => setItem(data[0]))
-    }, [itemId]);
+        let cancelled = false;
+
+        const loadItem = async () => {
+            try {
+                const data = await request(`/items?id=eq.${itemId}`);
+
+                if (!data.length) {
+                    throw new Error("Listing not found.");
+                }
+
+                if (!cancelled) {
+                    setItem(data[0]);
+                }
+            } catch (error) {
+                if (!cancelled) {
+                    toast.error(error.message || "Failed to load listing.");
+                    navigate("/catalog");
+                }
+            } finally {
+                if (!cancelled) {
+                    setIsLoading(false);
+                }
+            }
+        };
+
+        loadItem();
+
+        return () => {
+            cancelled = true;
+        };
+    }, [itemId, navigate]);
+
 
     const changeHandler = (e) => {
         const { name, value } = e.target;
@@ -33,19 +66,45 @@ export default function ItemEdit() {
     };
 
     const editAction = async () => {
+        if (
+            !item.title?.trim() ||
+            !item.category ||
+            item.price === "" ||
+            !item.description?.trim() ||
+            !item.images?.[0]?.trim()
+        ) {
+            toast.error("Please fill in all required fields.");
+            return;
+        }
+
+        if (Number(item.price) < 0) {
+            toast.error("Price cannot be negative.");
+            return;
+        }
+
+        if (isSubmitting) return;
+
+        setIsSubmitting(true);
 
         try {
             await itemApi.update(itemId, item);
 
+            toast.success("Listing updated successfully!");
             navigate(`/items/${itemId}`);
         } catch (error) {
-            alert(error.message);
+            toast.error(error.message || "Failed to update listing.");
+        } finally {
+            setIsSubmitting(false);
         }
     };
 
     const cancelHandler = () => {
         navigate(`/items/${itemId}`);
     };
+
+    if (isLoading) {
+        return <p className="text-center my-5">Loading listing...</p>;
+    }
 
 
     return (
@@ -74,7 +133,7 @@ export default function ItemEdit() {
                         </button>
                     </div>
 
-                    <form action={editAction} >
+                    <form action={editAction} noValidate >
                         <div className={styles["form-fields"]}>
                             <div className={styles["form-group"]}>
                                 <label htmlFor="title">Listing title *</label>
@@ -171,8 +230,12 @@ export default function ItemEdit() {
                             >
                                 Cancel
                             </button>
-                            <button type="submit" className={styles["add-button"]}>
-                                Save Changes
+                            <button
+                                type="submit"
+                                className={styles["add-button"]}
+                                disabled={isSubmitting || isLoading}
+                            >
+                                {isSubmitting ? "Saving..." : "Save Changes"}
                             </button>
                         </div>
                     </form>
