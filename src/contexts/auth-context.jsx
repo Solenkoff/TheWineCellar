@@ -1,19 +1,21 @@
-import { createContext, useContext } from "react";
-import usePersistedState from "../hooks/usePersistedState";
+
+import { createContext } from "react";
+import { toast } from "react-toastify";
 import { useNavigate } from "react-router";
+
 import { authApi } from "../api";
+import usePersistedState from "../hooks/usePersistedState";
 
 const AuthContext = createContext({
     accessToken: '',
     user: {},
     isAuthenticated: false,
-    register() { },
-    login() { },
+    register() {},
+    login() {},
+    logout() {},
 });
 
-export function AuthProvider({
-    children,
-}) {
+export function AuthProvider({ children }) {
     const navigate = useNavigate();
 
     const [auth, setAuth] = usePersistedState('auth', null);
@@ -23,10 +25,11 @@ export function AuthProvider({
             const result = await authApi.register(userData);
 
             setAuth(result);
+            toast.success("Registration successful! Welcome to FurniShelter!");
 
             navigate('/');
         } catch (error) {
-            alert(error.message);
+            toast.error(error.message || "Registration failed. Please try again.");
         }
     };
 
@@ -35,20 +38,21 @@ export function AuthProvider({
             const result = await authApi.login(userData);
 
             setAuth(result);
+            toast.success("Welcome back!");
 
             navigate('/');
         } catch (error) {
-            alert(error.message);
+            toast.error(error.message || "Login failed. Please try again.");
         }
     };
 
     const logoutAction = async () => {
         try {
             await authApi.logout(auth?.access_token);
-
-            setAuth(null);
         } catch (error) {
-            alert(error.message);
+            console.error("Logout request failed:", error);
+        } finally {
+            setAuth(null);
         }
     };
 
@@ -59,13 +63,13 @@ export function AuthProvider({
         register,
         login,
         logout: logoutAction,
-    }
+    };
 
     return (
-        <AuthContext.Provider value={contextValue} >
+        <AuthContext.Provider value={contextValue}>
             {children}
         </AuthContext.Provider>
-    )
-};
+    );
+}
 
 export default AuthContext;
