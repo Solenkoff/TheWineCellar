@@ -1,6 +1,8 @@
 import { Link, useNavigate } from 'react-router';
-import useAuth from '../../hooks/useAuth';
+import { toast } from 'react-toastify';
+
 import styles from './Login.module.css'
+import useAuth from '../../hooks/useAuth';
 
 export default function Login() {
     const { login } = useAuth();
@@ -11,7 +13,7 @@ export default function Login() {
         const { email, password } = Object.fromEntries(formData);
 
         if (!email || !password) {
-            alert('Email and password are required!');
+            toast.error('Email and password are required!');
             return;
         }
 
@@ -44,7 +46,7 @@ export default function Login() {
                         </button>
                     </div>
 
-                    <form action={submitAction}>
+                    <form action={submitAction} noValidate >
                         <div className={styles["login-form-group"]}>
                             <label htmlFor="login-email">Email *</label>
                             <input type="email" id="login-email" name="email" placeholder="you@example.com" required />
