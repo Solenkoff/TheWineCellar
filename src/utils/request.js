@@ -1,8 +1,7 @@
+
 const restUrl = import.meta.env.VITE_SUPABASE_REST_URL;
 const authUrl = import.meta.env.VITE_SUPABASE_AUTH_URL;
 const apiKey = import.meta.env.VITE_SUPABASE_PUBLISHABLE_API_KEY;
-
-//*  ToDo  ->   Image Upload
 
 async function baseRequest(url, path = '/', method = 'GET', data = null, opts = {}) {
     const options = {
@@ -17,7 +16,7 @@ async function baseRequest(url, path = '/', method = 'GET', data = null, opts = 
 
     if (method !== 'GET') {
         options.method = method;
-    } 
+    }
 
     if (data) {
         options.headers["Content-Type"] = "application/json";
@@ -27,30 +26,44 @@ async function baseRequest(url, path = '/', method = 'GET', data = null, opts = 
     const response = await fetch(`${url}${path}`, options);
 
     if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+        let errorMessage = `Request failed (${response.status})`;
+
+        try {
+            const errorData = await response.json();
+
+            errorMessage =
+                errorData.msg ||
+                errorData.message ||
+                errorData.error_description ||
+                errorData.error ||
+                errorMessage;
+        } catch {
+            // Fallback message HERE if the response is mot JSON
+        }
+
+        throw new Error(errorMessage);
     }
 
     if (response.status === 204) {
         return null;
     }
 
-    return response.json(); 
+    return response.json();
 }
 
 export default async function request(path = '/', method = 'GET', data = null, opts = {}) {
-    return baseRequest(restUrl, path , method, data, opts);
+    return baseRequest(restUrl, path, method, data, opts);
 }
 
 export const authRequest = async (path = '/', method = 'GET', data = null, opts = {}) => {
-    return baseRequest(authUrl, path , method, data, opts);
-}
-
+    return baseRequest(authUrl, path, method, data, opts);
+};
 
 function getAuthHeader() {
     const auth = localStorage.getItem('auth');
     const accessToken = auth ? JSON.parse(auth)?.access_token : null;
 
     return {
-        ...(accessToken ? { Authorization: `Bearer ${accessToken}` } : {})
-    }
+        ...(accessToken ? { Authorization: `Bearer ${accessToken}` } : {}),
+    };
 }
