@@ -3,6 +3,7 @@ import { useNavigate, useParams } from 'react-router';
 import { toast } from "react-toastify";
 
 import styles from './ItemEdit.module.css';
+import useAuth from "../../hooks/useAuth";
 import request from '../../utils/request';
 import { itemApi } from '../../api';
 
@@ -14,9 +15,11 @@ const initialValues = {
     images: [],
 }
 
+
 export default function ItemEdit() {
     const navigate = useNavigate();
     const { itemId } = useParams();
+    const { user } = useAuth();
     const [item, setItem] = useState(initialValues);
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
@@ -33,13 +36,24 @@ export default function ItemEdit() {
                     throw new Error("Listing not found.");
                 }
 
+                const listing = data[0];
+
+                // Only the owner can access the edit form
+                if (listing.owner_id !== user?.id) {
+                    if (!cancelled) {
+                        toast.error("You can only edit your own listings.");
+                        navigate(`/items/${itemId}`, { replace: true });
+                    }
+                    return;
+                }
+
                 if (!cancelled) {
-                    setItem(data[0]);
+                    setItem(listing);
                 }
             } catch (error) {
                 if (!cancelled) {
                     toast.error(error.message || "Failed to load listing.");
-                    navigate("/catalog");
+                    navigate("/catalog", { replace: true });
                 }
             } finally {
                 if (!cancelled) {
@@ -53,7 +67,8 @@ export default function ItemEdit() {
         return () => {
             cancelled = true;
         };
-    }, [itemId, navigate]);
+
+    }, [itemId, user?.id, navigate]);
 
 
     const changeHandler = (e) => {
@@ -66,6 +81,11 @@ export default function ItemEdit() {
     };
 
     const editAction = async () => {
+        if (item.owner_id !== user?.id) {
+            toast.error("You are not authorized to edit this listing.");
+            return;
+        }
+        
         if (
             !item.title?.trim() ||
             !item.category ||
