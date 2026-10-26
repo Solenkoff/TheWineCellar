@@ -1,47 +1,75 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router";
-
-import request from "../../utils/request";
-import CommentList from "../comments/comment-list/CommentList";
+import { toast } from "react-toastify";
 
 import styles from "./ItemDetails.module.css";
-import { itemApi } from "../../api";
 import useAuth from "../../hooks/useAuth";
+import { itemApi } from "../../api";
+import request from "../../utils/request";
+import CommentList from "../comments/comment-list/CommentList";
 
 export default function ItemDetails() {
     const { user } = useAuth();
     const { itemId } = useParams();
     const navigate = useNavigate();
     const [item, setItem] = useState({});
+    const [isDeleting, setIsDeleting] = useState(false);
 
     const isOwner = user && user?.id === item?.owner_id;
 
     useEffect(() => {
-        request(`/items?id=eq.${itemId}`)
-            .then(result => {
-                console.log(result[0]);
-                setItem(result[0]);
-            })
-            .catch(err => alert(err));
-    }, [itemId]);
+        let cancelled = false;
 
-    const deleteItemClickHandler = async (e) => {
-        e.preventDefault();
+        const loadItem = async () => {
+            try {
+                const result = await request(`/items?id=eq.${itemId}`);
 
-        const confirmed = confirm(`Are you sure you want to delete ${item.title} item?`);
+                if (!result.length) {
+                    throw new Error("Listing not found.");
+                }
 
-        if (!confirmed) {
-            return;
-        }
+                if (!cancelled) {
+                    setItem(result[0]);
+                }
+            } catch (error) {
+                if (!cancelled) {
+                    toast.error(error.message || "Failed to load listing.");
+                    navigate("/catalog");
+                }
+            }
+        };
+
+        loadItem();
+
+        return () => {
+            cancelled = true;
+        };
+    }, [itemId, navigate]);
+
+
+    const deleteItemClickHandler = async () => {
+        if (isDeleting) return;
+
+        const confirmed = window.confirm(
+            `Are you sure you want to delete "${item.title}"?`
+        );
+
+        if (!confirmed) return;
+
+        setIsDeleting(true);
 
         try {
             await itemApi.remove(itemId);
 
-            navigate('/catalog');
+            toast.success("Listing deleted successfully!");
+            navigate("/catalog");
         } catch (error) {
-            alert(error.message);
+            toast.error(error.message || "Failed to delete listing. Please try again.");
+        } finally {
+            setIsDeleting(false);
         }
-    }
+    };
+
 
     return (
 
@@ -102,10 +130,12 @@ export default function ItemDetails() {
                                             Edit
                                         </Link>
                                         <button
+                                            type="button"
                                             className={styles["details-btn"] + " " + styles["delete-btn"]}
                                             onClick={deleteItemClickHandler}
+                                            disabled={isDeleting}
                                         >
-                                            Delete
+                                            {isDeleting ? "Deleting..." : "Delete"}
                                         </button>
                                     </>
                                 )}
@@ -119,7 +149,6 @@ export default function ItemDetails() {
 
                             <CommentList
                                 itemId={itemId}
-                                user={user}
                             />
 
                         </div>
