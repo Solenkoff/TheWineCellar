@@ -1,6 +1,9 @@
 import { useState } from "react";
+import { toast } from "react-toastify";
+
 import styles from "./CommentCard.module.css";
 import formatDate from "../../../utils/formatDate";
+
 
 export default function CommentCard({
     comment,
@@ -10,6 +13,7 @@ export default function CommentCard({
 }) {
     const [isEditing, setIsEditing] = useState(false);
     const [isSaving, setIsSaving] = useState(false);
+    const [isDeleting, setIsDeleting] = useState(false);
 
     const isAuthor = !!user && user.id === comment.author_id;
 
@@ -20,26 +24,57 @@ export default function CommentCard({
     const editCommentAction = async (formData) => {
         const text = formData.get("text")?.trim();
 
-        if (!text) return;
+        if (!text) {
+            toast.error("Comment cannot be empty!");
+            return;
+        }
+
+        if (isSaving) return;
+
+        setIsSaving(true);
 
         try {
-            setIsSaving(true);
             await onEdit(comment.id, text);
+
+            toast.success("Comment updated successfully!");
             setIsEditing(false);
         } catch (error) {
-            alert(error.message);
+            toast.error(error.message || "Failed to update comment.");
         } finally {
             setIsSaving(false);
         }
     };
 
+    const deleteCommentHandler = async () => {
+        if (isDeleting) return;
+
+        const confirmed = window.confirm(
+            "Are you sure you want to delete this comment?"
+        );
+
+        if (!confirmed) return;
+
+        setIsDeleting(true);
+
+        try {
+            await onDelete(comment.id);
+
+            toast.success("Comment deleted successfully!");
+        } catch (error) {
+            toast.error(error.message || "Failed to delete comment.");
+        } finally {
+            setIsDeleting(false);
+        }
+    };
+
+
     return (
         <div className={styles["comment-card"]}>
-
             <div className={styles["comment-header"]}>
                 <span className={styles["comment-author"]}>
                     {comment.author}
                 </span>
+
                 {isAuthor && (
                     <div className={styles["comment-actions"]}>
                         <button
@@ -48,6 +83,7 @@ export default function CommentCard({
                             title="Edit comment"
                             aria-label="Edit comment"
                             onClick={() => setIsEditing(true)}
+                            disabled={isSaving || isDeleting}
                         >
                             ✎
                         </button>
@@ -57,16 +93,21 @@ export default function CommentCard({
                             className={styles["comment-action-btn"]}
                             title="Delete comment"
                             aria-label="Delete comment"
-                            onClick={() => onDelete(comment.id)}
+                            onClick={deleteCommentHandler}
+                            disabled={isSaving || isDeleting}
                         >
-                            ×
+                            {isDeleting ? "..." : "×"}
                         </button>
                     </div>
                 )}
             </div>
 
             {isEditing ? (
-                <form action={editCommentAction} className={styles["comment-edit-form"]}>
+                <form
+                    action={editCommentAction}
+                    className={styles["comment-edit-form"]}
+                    noValidate
+                >
                     <textarea
                         name="text"
                         defaultValue={comment.text}
@@ -100,7 +141,6 @@ export default function CommentCard({
                     ? `Edited: ${formatDate(comment.updated_at)}`
                     : formatDate(comment.created_at)}
             </span>
-
         </div>
     );
 }
