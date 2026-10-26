@@ -1,20 +1,48 @@
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
+
 import ItemCard from "../item-card/ItemCard";
 import { itemApi } from "../../api";
 
+
 export default function Catalog() {
     const [items, setItems] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
+    const [loadError, setLoadError] = useState(false);
 
     useEffect(() => {
-        itemApi.getAll()
-            .then(setItems)
-            .catch(err => alert(err));
+        let cancelled = false;
+
+        const loadItems = async () => {
+            try {
+                const result = await itemApi.getAll();
+
+                if (!cancelled) {
+                    setItems(result);
+                }
+            } catch (error) {
+                if (!cancelled) {
+                    setLoadError(true);
+                    toast.error(error.message || "Failed to load listings.");
+                }
+            } finally {
+                if (!cancelled) {
+                    setIsLoading(false);
+                }
+            }
+        };
+
+        loadItems();
+
+        return () => {
+            cancelled = true;
+        };
     }, []);
 
+    
     return (
-
         <>
-            {/* Start Hero Section */}
+
             <div className="hero">
                 <div className="container">
                     <div className="row justify-content-between">
@@ -27,20 +55,26 @@ export default function Catalog() {
                     </div>
                 </div>
             </div>
-            {/* End Hero Section */}
 
             <div className="untree_co-section product-section before-footer-section">
                 <div className="container">
                     <div className="row">
-                        {items.length > 0
-                            ? items.map(item => <ItemCard key={item.id} {...item} />)
-                            : <h1>No Added Items Yet</h1>
-                        }
+                        {isLoading ? (
+                            <p>Loading listings...</p>
+                        ) : loadError ? (
+                            <p>Listings could not be loaded. Please refresh the page.</p>
+                        ) : items.length > 0 ? (
+                            items.map(item => (
+                                <ItemCard key={item.id} {...item} />
+                            ))
+                        ) : (
+                            <h2>No Added Items Yet</h2>
+                        )}
                     </div>
                 </div>
             </div>
 
         </>
-
     );
+
 }
