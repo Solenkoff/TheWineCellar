@@ -1,4 +1,5 @@
 import { useContext, useEffect, useReducer, useState } from "react";
+import { toast } from "react-toastify";
 
 import AuthContext from "../../../contexts/auth-context";
 import { commentReducer } from "../comment-reducer";
@@ -13,16 +14,44 @@ export default function CommentList({
 }) {
     const [comments, dispatch] = useReducer(commentReducer, []);
     const [isAdding, setIsAdding] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
+    const [loadError, setLoadError] = useState(false);
     const { user } = useContext(AuthContext);
 
     useEffect(() => {
-        commentApi.getAll(itemId)
-            .then(result => {
-                dispatch({ type: 'SET_COMMENTS', payload: result });
-            })
-            .catch(error => {
-                alert(error.message);
-            });
+        let cancelled = false;
+
+        const loadComments = async () => {
+            setIsLoading(true);
+            setLoadError(false);
+
+            try {
+                const result = await commentApi.getAll(itemId);
+
+                if (!cancelled) {
+                    dispatch({
+                        type: "SET_COMMENTS",
+                        payload: result,
+                    });
+                }
+            } catch (error) {
+                if (!cancelled) {
+                    setLoadError(true);
+                    toast.error(error.message || "Failed to load comments.");
+                }
+            } finally {
+                if (!cancelled) {
+                    setIsLoading(false);
+                }
+            }
+        };
+
+        loadComments();
+
+        return () => {
+            cancelled = true;
+        };
+
     }, [itemId]);
 
     const commentAddedHandler = (comment) => {
@@ -48,20 +77,16 @@ export default function CommentList({
     };
 
     const deleteCommentHandler = async (commentId) => {
-        const confirmed = window.confirm("Are you sure you want to delete this comment?");
+        const result = await commentApi.remove(commentId);
 
-        if (!confirmed) return;
-
-        try {
-            await commentApi.remove(commentId);
-
-            dispatch({
-                type: 'DELETE_COMMENT',
-                payload: commentId,
-            });
-        } catch (error) {
-            alert(error.message);
+        if (!result?.length) {
+            throw new Error("Comment could not be deleted.");
         }
+
+        dispatch({
+            type: "DELETE_COMMENT",
+            payload: commentId,
+        });
     };
 
 
@@ -74,8 +99,11 @@ export default function CommentList({
 
             <div className={styles["comments-layout"]}>
 
-                {comments.length > 0
-                    ?
+                {isLoading ? (
+                    <p>Loading comments...</p>
+                ) : loadError ? (
+                    <p>Comments could not be loaded. Please refresh the page.</p>
+                ) : comments.length > 0 ? (
                     <div className={styles["comments-list"]}>
                         {comments.map(comment => (
                             <CommentCard
@@ -87,14 +115,14 @@ export default function CommentList({
                             />
                         ))}
                     </div>
-                    :
+                ) : (
                     <div className={styles["no-comment-yet"]}>
-                        <p >No comments on this piece yet.</p>
+                        <p>No comments on this piece yet.</p>
                         {user && (
-                            <p >Be the first to share your thoughts or ask the owner a question!</p>
+                            <p>Be the first to share your thoughts or ask the owner a question!</p>
                         )}
                     </div>
-                }
+                )}
 
 
                 {user && (
