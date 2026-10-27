@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router";
+import { toast } from "react-toastify";
 
 import request from "../../utils/request";
 import ItemCard from "../item-card/ItemCard";
 import Testimonials from "../testimonials/Testimonials";
 import WhyUs from "../why-us/WhyUs";
+
 
 export default function Home() {
     const [latestItems, setLatestItems] = useState([]);
@@ -22,6 +24,37 @@ export default function Home() {
         }
     }, []);
 
+    useEffect(() => {
+        const controler = new AbortController();
+
+        const loadLatestItems = async () => {
+            try {
+                const result = await request(
+                    "/items?deleted_on=is.null&order=added_on.desc&limit=3",
+                    "GET",
+                    null,
+                    { signal: controler.signal }
+                );
+
+                if (!controler.signal.aborted) {
+                    setLatestItems(result);
+                }
+            } catch (error) {
+                if (controler.signal.aborted) return;
+
+                toast.error(error.message || "Failed to load latest listings.");
+            }
+        };
+
+        loadLatestItems();
+
+        return () => {
+            controler.abort();
+        };
+
+    }, []);
+
+    
     return (
 
         <>

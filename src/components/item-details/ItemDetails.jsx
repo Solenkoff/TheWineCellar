@@ -139,12 +139,6 @@ export default function ItemDetails() {
                                         </button>
                                     </>
                                 )}
-
-                                {!isOwner && (
-                                    <button className={styles["details-btn"] + " " + styles["like-btn"]}>
-                                        ♡ &nbsp; 14 Likes
-                                    </button>
-                                )}
                             </div>
 
                             <CommentList

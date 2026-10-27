@@ -1,7 +1,6 @@
 import { Route, Routes } from "react-router";
 
 import { AuthProvider } from "./contexts/auth-context";
-
 import AuthGuard from "./components/route-guards/AuthGuard";
 import GuestGuard from "./components/route-guards/GuestGuard";
 
