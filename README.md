@@ -6,11 +6,11 @@ Visitors can browse listings and read comments. After signing up, users can post
 
 ## Live Demo
 
-**Coming soon — I'll add the Cloudflare Pages link after deployment.**
+    https://furni-shelter.solenkoff.workers.dev/
 
 ## GitHub Repository
-
-**Coming soon — FurniShelter repository here.**
+ 
+    https://github.com/Solenkoff/FurniShelter
 
 ## Tech Stack
 
@@ -183,7 +183,7 @@ Styling combines the adapted **Furni** template, Bootstrap classes and **CSS Mod
 
 The React frontend is deployed on **Cloudflare Pages**. Supabase hosts the backend and database.
 
-**Live URL:** I'llk add it after deployment.
+**Live URL:**   https://furni-shelter.solenkoff.workers.dev/
 
 ## UI Template Credit
 
